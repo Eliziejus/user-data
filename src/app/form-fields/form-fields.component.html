@@ -1,0 +1,30 @@
+<form [formGroup]="profileData" (ngSubmit)="showData()">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="name" placeholder="Enter name">
+  </div>
+  <div class="form-group">
+    <label>Surname</label>
+    <input type="text" id="surname" class="form-control" formControlName="surname" placeholder="Enter Surname">
+  </div>
+  <div class="form-group">
+    <label>Birthday</label>
+    <input type="date" class="form-control" formControlName="birthday" placeholder="Enter Birthday">
+  </div>
+  <div class="form-group">
+    <label>Gender</label>
+    <input type="text" class="form-control" formControlName="gender" placeholder="Select Gender">
+  </div>
+  <div class="form-group">
+    <label>PhoneNumber</label>
+    <input type="number" class="form-control" formControlName="phoneNumber" placeholder="Enter phoneNumber">
+  </div>
+
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
