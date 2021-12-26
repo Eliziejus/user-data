@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DataService} from "../services/data.service";
 import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-form-fields',
@@ -18,6 +19,7 @@ export class FormFieldsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public dataService: DataService,
+    private router: Router
 ) {
   }
 

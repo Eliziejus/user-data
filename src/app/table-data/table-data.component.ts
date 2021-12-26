@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../services/data.service";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-table-data',
@@ -11,15 +12,11 @@ import {DataService} from "../services/data.service";
 export class TableDataComponent implements OnInit {
   tableData = [];
 
-  constructor(public dataService: DataService) {
+  constructor(public dataService: DataService, private router: Router) {
     this.dataService = dataService;
   }
 
   ngOnInit(): void {
-
-    this.dataService.getData().subscribe(data => {
-      console.log(data);
-    })
-    console.log(...this.tableData);
+    console.log(this.profileData);
   }
 }

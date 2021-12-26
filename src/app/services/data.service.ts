@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, of, Subject} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class DataService {
   public profileData = new Subject<any>();
   public sharedData = this.profileData.asObservable();
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   public setData(profileData: any[]): void {
@@ -18,7 +19,7 @@ export class DataService {
   }
 
   public getData() {
-    console.log(this.sharedData);
+    this.router.navigate(['/table'], this.sharedData);
     return of(this.sharedData);
   }
 
