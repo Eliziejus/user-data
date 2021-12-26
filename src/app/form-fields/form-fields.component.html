@@ -1,26 +1,62 @@
-<form [formGroup]="profileData" (ngSubmit)="showData()">
+<form [formGroup]="profileData" (ngSubmit)="addData()">
   <div class="container">
     <div class="form-group">
       <label>Name</label>
       <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="name"
              placeholder="Enter name">
+      <span class="error" *ngIf="name.invalid && name.touched">Name is invalid</span>
     </div>
     <div class="form-group">
       <label>Surname</label>
       <input type="text" id="surname" class="form-control" formControlName="surname" placeholder="Enter Surname">
+      <span class="error" *ngIf="surname.invalid && surname.touched">Surname is required</span>
     </div>
     <div class="form-group">
       <label>Birthday</label>
       <input type="date" class="form-control" formControlName="birthday" placeholder="Enter Birthday">
+      <span class="error" *ngIf="birthday.invalid && birthday.touched">Birthday is required</span>
+
     </div>
     <div class="form-group">
       <label>Gender</label>
-      <input type="text" class="form-control" formControlName="gender" placeholder="Select Gender">
+      <select (change)="changeGender($event)" class="form-control" formControlName="gender">
+        <option [ngValue]=null disabled> Select your gender</option>
+        <option *ngFor="let gender of genderArray" [ngValue]="gender">{{gender}}</option>
+      </select>
+      <span class="error" *ngIf="gender.invalid && gender.touched">gender is required</span>
     </div>
     <div class="form-group">
       <label>PhoneNumber</label>
       <input type="number" class="form-control" formControlName="phoneNumber" placeholder="Enter phoneNumber">
+      <span class="error" *ngIf="phoneNumber.invalid && phoneNumber.touched">Phone number is required</span>
     </div>
-    <button type="submit" class="btn btn-danger">Submit</button>
+    <button type="submit" class="btn btn-danger" [disabled]="!profileData.valid">Submit</button>
   </div>
 </form>
+
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Full name</th>
+    <th scope="col">Age</th>
+    <th scope="col">Gerder</th>
+    <th scope="col">Phone Number</th>
+    <th scope="col">Personal ID</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of tableData">
+    <th>{{item.name}} {{item.surname}}</th>
+    <td>{{item.birthday}}</td>
+    <td>{{item.gender}}</td>
+    <td>{{item.phoneNumber}}</td>
+    <td>@mdo</td>
+    <td>
+      <button class="bg-light"> Edit</button>
+      <button class="bg-light"> Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+

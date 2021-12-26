@@ -1,34 +1,67 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
+import {Component, Input, OnInit, Output} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {DataService} from "../services/data.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-form-fields',
   templateUrl: './form-fields.component.html',
-  styleUrls: ['./form-fields.component.scss']
+  styleUrls: ['./form-fields.component.scss'],
+  providers: [DataService],
 })
 export class FormFieldsComponent implements OnInit {
 
-  @Input()
-  public profileData = new FormGroup({
-    name: new FormControl(''),
-    surname: new FormControl(''),
-    birthday: new FormControl(''),
-    gender: new FormControl(''),
-    phoneNumber: new FormControl(''),
-  })
-  constructor(private formBuilder: FormBuilder, private httpClient: HttpClient) {
+  public profileData: any = [];
+  public tableData: any = [];
+  genderArray: any = ['Male', 'Female', 'I dont know'];
+
+  constructor(
+    private formBuilder: FormBuilder,
+    public dataService: DataService,
+) {
   }
 
   ngOnInit(): void {
     this.profileData = this.formBuilder.group({
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      birthday: ['', Validators.required],
+      gender: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+    });
+  }
 
+  get name() {
+    return this.profileData.get('name');
+  }
+
+  get surname() {
+    return this.profileData.get('surname');
+  }
+
+  get birthday() {
+    return this.profileData.get('birthday');
+  }
+
+  get gender() {
+    return this.profileData.get('gender');
+  }
+
+  changeGender(event: any){
+    this.gender.setValue(event.target, {
+      onlySelf: true
     })
   }
 
-  public showData(): void {
+  get phoneNumber() {
+    return this.profileData.get('phoneNumber');
+  }
 
-    console.log(this.profileData);
+
+
+  public addData(): void {
+    this.dataService.setData(this.profileData.value)
+    this.ngOnInit();
   }
 
 }

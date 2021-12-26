@@ -8,6 +8,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { RouterModule, Routes } from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
 import { TableDataComponent } from './table-data/table-data.component';
+import {DataService} from "./services/data.service";
+import {HttpClientModule} from "@angular/common/http";
 
 const router: Routes = [
   { path: 'form', component: FormFieldsComponent },
@@ -27,9 +29,10 @@ const router: Routes = [
     ReactiveFormsModule,
     BrowserModule,
     RouterModule.forRoot(router),
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
