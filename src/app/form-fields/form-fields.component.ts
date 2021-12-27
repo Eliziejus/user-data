@@ -1,8 +1,8 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, Input, OnInit,} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DataService} from "../services/data.service";
-import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
+import {Profile} from "../models/profile.model";
 
 @Component({
   selector: 'app-form-fields',
@@ -12,15 +12,14 @@ import {Router} from "@angular/router";
 })
 export class FormFieldsComponent implements OnInit {
 
-  public profileData: any = [];
-  public tableData: any = [];
+
+  @Input() public profileData: any = FormGroup;
   genderArray: any = ['Male', 'Female', 'I dont know'];
 
   constructor(
     private formBuilder: FormBuilder,
     public dataService: DataService,
-    private router: Router
-) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -49,7 +48,7 @@ export class FormFieldsComponent implements OnInit {
     return this.profileData.get('gender');
   }
 
-  changeGender(event: any){
+  changeGender(event: any) {
     this.gender.setValue(event.target, {
       onlySelf: true
     })
@@ -60,9 +59,8 @@ export class FormFieldsComponent implements OnInit {
   }
 
 
-
   public addData(): void {
-    this.dataService.setData(this.profileData.value)
+    const data = this.dataService.setData(this.profileData.value)
     this.ngOnInit();
   }
 

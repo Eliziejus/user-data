@@ -10,13 +10,16 @@ import {Route, Router} from "@angular/router";
 
 })
 export class TableDataComponent implements OnInit {
-  tableData = [];
+  myData: any = [];
 
-  constructor(public dataService: DataService, private router: Router) {
-    this.dataService = dataService;
+
+  constructor(public dataService: DataService) {
   }
 
   ngOnInit(): void {
-    console.log(this.profileData);
+    this.dataService.getData().subscribe((res)=>{
+      this.myData = 'hello'
+    })
+
   }
 }

@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable, Input} from "@angular/core";
 import {BehaviorSubject, of, Subject} from "rxjs";
 import {Router} from "@angular/router";
 
@@ -6,21 +6,19 @@ import {Router} from "@angular/router";
   providedIn: 'root'
 })
 export class DataService {
-
-  public profileData = new Subject<any>();
-  public sharedData = this.profileData.asObservable();
+  public profileData = new BehaviorSubject([]);
 
   constructor(private router: Router) {
   }
 
-  public setData(profileData: any[]): void {
-    console.log(profileData);
-    return this.profileData.next(profileData);
+  public setData(profile: any): void {
+    this.profileData = profile
+    console.log(this.profileData);
   }
 
   public getData() {
-    this.router.navigate(['/table'], this.sharedData);
-    return of(this.sharedData);
+    console.log(this.profileData)
+    return this.profileData;
   }
 
 
