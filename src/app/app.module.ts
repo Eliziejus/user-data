@@ -15,7 +15,6 @@ const router: Routes = [
   { path: 'form', component: FormFieldsComponent },
   { path: 'home', component: HomePageComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'table', component: TableDataComponent},
 ];
 @NgModule({
   declarations: [
@@ -30,7 +29,7 @@ const router: Routes = [
     BrowserModule,
     RouterModule.forRoot(router),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

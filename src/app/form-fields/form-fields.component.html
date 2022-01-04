@@ -19,11 +19,11 @@
     </div>
     <div class="form-group">
       <label>Gender</label>
-      <select (change)="changeGender($event)" class="form-control" formControlName="gender">
-        <option [ngValue]=null disabled> Select your gender</option>
-        <option *ngFor="let gender of genderArray" [ngValue]="gender">{{gender}}</option>
+      <select class="form-control" formControlName="gender">
+        <option value="" disabled> Select your gender</option>
+        <option *ngFor="let gender of genderArray" [ngValue]="gender.value">{{gender.value}}</option>
       </select>
-      <span class="error" *ngIf="gender.invalid && gender.touched">gender is required</span>
+      <span class="error" *ngIf="gender.invalid && gender.touched">Gender is required</span>
     </div>
     <div class="form-group">
       <label>PhoneNumber</label>
@@ -35,28 +35,5 @@
 </form>
 
 
-<!--<table class="table">-->
-<!--  <thead>-->
-<!--  <tr>-->
-<!--    <th scope="col">Full name</th>-->
-<!--    <th scope="col">Age</th>-->
-<!--    <th scope="col">Gerder</th>-->
-<!--    <th scope="col">Phone Number</th>-->
-<!--    <th scope="col">Personal ID</th>-->
-<!--  </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
-<!--  <tr *ngFor="let item of tableData">-->
-<!--    <th>{{item.name}} {{item.surname}}</th>-->
-<!--    <td>{{item.birthday}}</td>-->
-<!--    <td>{{item.gender}}</td>-->
-<!--    <td>{{item.phoneNumber}}</td>-->
-<!--    <td>@mdo</td>-->
-<!--    <td>-->
-<!--      <button class="bg-light"> Edit</button>-->
-<!--      <button class="bg-light"> Delete</button>-->
-<!--    </td>-->
-<!--  </tr>-->
-<!--  </tbody>-->
-<!--</table>-->
+<app-table-data [profiles]="data"></app-table-data>
 

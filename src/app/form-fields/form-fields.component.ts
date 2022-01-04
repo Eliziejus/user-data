@@ -1,24 +1,30 @@
-import {Component, Input, OnInit,} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ChangeDetectionStrategy, Component, OnInit,} from '@angular/core';
+import {FormBuilder, Validators} from "@angular/forms";
 import {DataService} from "../services/data.service";
-import {Router} from "@angular/router";
-import {Profile} from "../models/profile.model";
+import {Gender} from "../models/gender.model";
 
 @Component({
   selector: 'app-form-fields',
   templateUrl: './form-fields.component.html',
   styleUrls: ['./form-fields.component.scss'],
   providers: [DataService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormFieldsComponent implements OnInit {
 
 
-  @Input() public profileData: any = FormGroup;
-  genderArray: any = ['Male', 'Female', 'I dont know'];
+  profileData: any;
+  public data: any = [];
+
+  genderArray = [
+    new Gender('1', 'Male'),
+    new Gender('2', 'Female'),
+    new Gender('3', 'I dont know'),
+
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
-    public dataService: DataService,
   ) {
   }
 
@@ -29,8 +35,14 @@ export class FormFieldsComponent implements OnInit {
       birthday: ['', Validators.required],
       gender: ['', Validators.required],
       phoneNumber: ['', Validators.required],
+      personalId: [this.getPersonalId()]
     });
+    this.data.subscribe();
   }
+
+  public getPersonalId() {
+    return Math.floor((Math.random() * 100) + 1);
+  };
 
   get name() {
     return this.profileData.get('name');
@@ -48,20 +60,29 @@ export class FormFieldsComponent implements OnInit {
     return this.profileData.get('gender');
   }
 
-  changeGender(event: any) {
-    this.gender.setValue(event.target, {
-      onlySelf: true
-    })
-  }
-
   get phoneNumber() {
     return this.profileData.get('phoneNumber');
   }
 
 
   public addData(): void {
-    const data = this.dataService.setData(this.profileData.value)
+    const save = this.profileData.value;
+    this.data.push(save);
+    console.log(save);
+    this.addSomeData(save);
     this.ngOnInit();
+  }
+
+  public addSomeData(save: any) {
+    let profileStorage: any = [];
+    if (localStorage.getItem('app.data')){
+      profileStorage = localStorage.getItem('app.data');
+      profileStorage = [save, ...profileStorage];
+    }else {
+      profileStorage = [save];
+    }
+    localStorage.setItem('app.data', JSON.stringify(save));
+
   }
 
 }
