@@ -15,7 +15,7 @@ export class DataService {
     return JSON.parse(localStorage.getItem('app') || '[]');
   }
 
-  public getData() { //TOdo change namel nužsetinti profile data nesvarbu ar yra ar nera duomenu
+  public getData() {
     return JSON.parse(localStorage.getItem('app') || '[]');
 
   }
