@@ -1,24 +1,23 @@
-import {Injectable, Input} from "@angular/core";
-import {BehaviorSubject, of, Subject} from "rxjs";
-import {Router} from "@angular/router";
+import {Injectable} from "@angular/core";
+import {BehaviorSubject} from "rxjs";
+import {Profile} from "../models/profile.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  public profileData = new BehaviorSubject([]);
+  private profile: Profile[];
+  public profileData = new BehaviorSubject<Profile[]>([]);
 
-  constructor(private router: Router) {
+  public setData(profile: Profile[]){
+    this.profileData.next(this.profileData.value.concat(profile));
+    localStorage.setItem('app', JSON.stringify(this.profileData.value));
+    return JSON.parse(localStorage.getItem('app') || '[]');
   }
 
-  public setData(profile: any): void {
-    this.profileData = profile
-    console.log(this.profileData);
-  }
+  public getData() { //TOdo change namel nužsetinti profile data nesvarbu ar yra ar nera duomenu
+    return JSON.parse(localStorage.getItem('app') || '[]');
 
-  public getData() {
-    console.log(this.profileData)
-    return this.profileData;
   }
 
 

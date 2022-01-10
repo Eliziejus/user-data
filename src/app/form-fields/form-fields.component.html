@@ -1,21 +1,24 @@
-<form [formGroup]="profileData" (ngSubmit)="addData()">
+<form [formGroup]="profileForm" (ngSubmit)="addData()">
+  <br>
   <div class="container">
     <div class="form-group">
       <label>Name</label>
       <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="name"
              placeholder="Enter name">
-      <span class="error" *ngIf="name.invalid && name.touched">Name is invalid</span>
+      <span class="error" *ngIf="profileForm.controls['name'].invalid && profileForm.controls['name'].touched">Name is invalid</span>
+      <br>
     </div>
     <div class="form-group">
       <label>Surname</label>
       <input type="text" id="surname" class="form-control" formControlName="surname" placeholder="Enter Surname">
-      <span class="error" *ngIf="surname.invalid && surname.touched">Surname is required</span>
+      <span class="error" *ngIf="profileForm.controls['surname'].invalid && profileForm.controls['surname'].touched">Surname is required</span>
+      <br>
     </div>
     <div class="form-group">
       <label>Birthday</label>
-      <input type="date" class="form-control" formControlName="birthday" placeholder="Enter Birthday">
-      <span class="error" *ngIf="birthday.invalid && birthday.touched">Birthday is required</span>
-
+      <input [readOnly]="profileForm.controls['name'].invalid || profileForm.controls['surname'].invalid  " type="date" class="form-control" [max]="now" formControlName="birthday" placeholder="Enter Birthday">
+      <span class="error" *ngIf="profileForm.controls['birthday'].invalid && profileForm.controls['birthday'].touched">Birthday is required</span>
+      <br>
     </div>
     <div class="form-group">
       <label>Gender</label>
@@ -23,14 +26,16 @@
         <option value="" disabled> Select your gender</option>
         <option *ngFor="let gender of genderArray" [ngValue]="gender.value">{{gender.value}}</option>
       </select>
-      <span class="error" *ngIf="gender.invalid && gender.touched">Gender is required</span>
+      <span class="error" *ngIf="profileForm.controls['gender'].invalid && profileForm.controls['gender'].touched">Gender is required</span>
+      <br>
     </div>
     <div class="form-group">
       <label>PhoneNumber</label>
-      <input type="number" class="form-control" formControlName="phoneNumber" placeholder="Enter phoneNumber">
-      <span class="error" *ngIf="phoneNumber.invalid && phoneNumber.touched">Phone number is required</span>
+      <input type="number" class="form-control" name="phoneNumber" id="phoneNumber" formControlName="phoneNumber">
+      <span class="error" *ngIf="profileForm.controls['phoneNumber'].invalid && profileForm.controls['phoneNumber'].touched">Phone number is required</span>
+      <br>
     </div>
-    <button type="submit" class="btn btn-danger" [disabled]="!profileData.valid">Submit</button>
+    <button type="submit" class="btn btn-danger m-1" [disabled]="profileForm.invalid">Submit</button>
   </div>
 </form>
 

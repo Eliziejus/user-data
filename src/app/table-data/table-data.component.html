@@ -2,22 +2,23 @@
   <thead>
   <tr>
     <th scope="col">Name</th>
-    <th scope="col">Age</th>
+    <th [appSort]="profiles" data-order="desc" data-name="birthday" scope="col">Age</th>
     <th scope="col">Gerder</th>
     <th scope="col">Phone Number</th>
     <th scope="col">Personal ID</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor = "let item of profiles">
+  <tr *ngFor="let item of profiles">
     <th>{{item.name}} {{item.surname}}</th>
-    <td>{{item.birthday}}</td>
-    <td>{{item.gender}}</td>
-    <td>{{item.phoneNumber}}</td>
-    <td>{{item.personalId}}</td>
+        <td>{{getDate(item.birthday)}}</td>
+        <td>{{item.gender}}</td>
+        <td><a href="tel: +{{item.phoneNumber}} ">{{item.phoneNumber}}</a></td>
+        <td>{{item.personalId}}</td>
+
     <td>
-      <button class="bg-light"> Edit</button>
-      <button class="bg-light"> Delete</button>
+      <button class="btn btn-outline-primary mr-2" > Edit</button>
+      <button class="btn btn-outline-danger mr-2" (click)="clickMethod('name')"> Delete</button>
     </td>
   </tr>
   </tbody>

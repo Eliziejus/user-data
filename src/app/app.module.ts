@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { TableDataComponent } from './table-data/table-data.component';
 import {DataService} from "./services/data.service";
 import {HttpClientModule} from "@angular/common/http";
+import { SortDirective } from './directive/sort.directive';
+import {ConfirmBoxConfigModule, NgxAwesomePopupModule} from "@costlydeveloper/ngx-awesome-popup";
 
 const router: Routes = [
   { path: 'form', component: FormFieldsComponent },
@@ -22,7 +24,8 @@ const router: Routes = [
     FormFieldsComponent,
     HeaderComponent,
     HomePageComponent,
-    TableDataComponent
+    TableDataComponent,
+    SortDirective,
   ],
   imports: [
     ReactiveFormsModule,
@@ -30,6 +33,8 @@ const router: Routes = [
     RouterModule.forRoot(router),
     AppRoutingModule,
     HttpClientModule,
+    NgxAwesomePopupModule.forRoot(),
+    ConfirmBoxConfigModule.forRoot()
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
