@@ -1,3 +1,5 @@
+import {SortEnum} from "../enums/sort-enum";
+
 export class Sort {
 
   private sortOrder = 1;
@@ -10,11 +12,11 @@ export class Sort {
   }
 
   public startSort(property: any, order: any, type = "") {
-    if (order === "desc") {
+    if (order === SortEnum.Desc) {
       this.sortOrder = -1;
     }
     return (a: any, b: any) => {
-      if (type === "date") {
+      if (type === SortEnum.Date) {
         return this.sortData(new Date(a[property]), new Date(b[property]));
       } else {
         return this.collator.compare(a[property], b[property]) * this.sortOrder;

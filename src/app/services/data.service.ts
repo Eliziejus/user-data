@@ -6,18 +6,17 @@ import {Profile} from "../models/profile.model";
   providedIn: 'root'
 })
 export class DataService {
-  private profile: Profile[];
   public profileData = new BehaviorSubject<Profile[]>([]);
 
-  public setData(profile: Profile[]){
-    this.profileData.next(this.profileData.value.concat(profile));
-    localStorage.setItem('app', JSON.stringify(this.profileData.value));
-    return JSON.parse(localStorage.getItem('app') || '[]');
+  public setData(profile: Profile){
+    const value = this.profileData.value
+    value.push(profile);
+    this.profileData.next(value);
+    localStorage.setItem('app', JSON.stringify(value));
   }
 
   public getData() {
     return JSON.parse(localStorage.getItem('app') || '[]');
-
   }
 
 

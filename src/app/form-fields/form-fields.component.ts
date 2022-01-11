@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DataService} from "../services/data.service";
 import {Gender} from "../models/gender.model";
 import {countries} from "../country-data-store";
-import { DatePipe } from "@angular/common";
+import {DatePipe} from "@angular/common";
+import {Profile} from "../models/profile.model";
 
 
 @Component({
@@ -11,13 +12,15 @@ import { DatePipe } from "@angular/common";
   templateUrl: './form-fields.component.html',
   styleUrls: ['./form-fields.component.scss'],
   providers: [DataService],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class FormFieldsComponent implements OnInit {
 
-  public countries: any = countries;
+  public countries = countries;
   public profileForm: FormGroup;
-  public data: any = [];
-  public now: any;
+  public data: Profile[];
+  public now: string | null;
+
 
   genderArray = [
     new Gender('1', 'Male'),
@@ -29,6 +32,7 @@ export class FormFieldsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
+    private ref: ChangeDetectorRef
   ) {
   }
 
@@ -38,14 +42,18 @@ export class FormFieldsComponent implements OnInit {
       surname: ['', Validators.required],
       birthday: ['', Validators.required,],
       gender: ['', Validators.required],
-      phoneNumber: ['86',  [ Validators.required,
-        Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),
+      phoneNumber: ['86', [Validators.required,
         Validators.minLength(11), Validators.maxLength(11)]],
       personalId: [this.getPersonalId()],
     });
 
     const datePipe = new DatePipe('en-Us');
     this.now = datePipe.transform(new Date(), 'yyyy-MM-dd')
+    this.ref.detectChanges();
+    this.dataService.profileData.subscribe((item) => {
+      this.data = item;
+    });
+
   }
 
   public getPersonalId() {
@@ -53,7 +61,8 @@ export class FormFieldsComponent implements OnInit {
   };
 
   public addData() {
-    this.dataService.setData(this.profileForm.value)
+    this.dataService.setData(this.profileForm.value);
+
   }
 
 }
