@@ -11,8 +11,7 @@ import {Profile} from "../models/profile.model";
   selector: 'app-form-fields',
   templateUrl: './form-fields.component.html',
   styleUrls: ['./form-fields.component.scss'],
-  providers: [DataService],
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class FormFieldsComponent implements OnInit {
 
@@ -32,7 +31,7 @@ export class FormFieldsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
-    private ref: ChangeDetectorRef
+    private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -49,9 +48,9 @@ export class FormFieldsComponent implements OnInit {
 
     const datePipe = new DatePipe('en-Us');
     this.now = datePipe.transform(new Date(), 'yyyy-MM-dd')
-    this.ref.detectChanges();
     this.dataService.profileData.subscribe((item) => {
       this.data = item;
+      this.cdr.markForCheck();
     });
 
   }
@@ -60,8 +59,11 @@ export class FormFieldsComponent implements OnInit {
     return Math.floor((Math.random() * 100) + 1);
   };
 
-  public addData() {
-    this.dataService.setData(this.profileForm.value);
+  public addData():void {
+    if (this.profileForm.valid){
+      this.dataService.setData(this.profileForm.value);
+      this.profileForm.reset();
+    }
 
   }
 
