@@ -1,12 +1,13 @@
 import {ChangeDetectorRef, Component, Input, OnChanges} from '@angular/core';
 import {Profile} from "../models/profile.model";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-table-data',
   templateUrl: './table-data.component.html',
   styleUrls: ['./table-data.component.scss'],
 })
-export class TableDataComponent {
+export class TableDataComponent implements OnChanges{
 
   @Input() profiles: Profile[];
 
@@ -27,6 +28,10 @@ export class TableDataComponent {
     }
   }
 
+  public ngOnChanges() {
+    this.cdr.detectChanges();
+
+  }
 
   editProfileData(id: number){
     this.router.navigate(['/edit', id])
