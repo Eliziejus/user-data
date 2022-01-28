@@ -5,6 +5,7 @@ import {Gender} from "../models/gender.model";
 import {countries} from "../country-data-store";
 import {DatePipe} from "@angular/common";
 import {Profile} from "../models/profile.model";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -31,7 +32,8 @@ export class FormFieldsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
   ) {
   }
 
@@ -53,6 +55,29 @@ export class FormFieldsComponent implements OnInit {
       this.cdr.markForCheck();
     });
 
+    this.route.paramMap.subscribe(params => {
+      const profileId = params.get('id') as null;
+      if(profileId) {
+        this.getProfileData(profileId);
+      }
+    });
+  }
+
+  getProfileData(id: number) {
+    this.dataService.getProfile(id).subscribe(
+      (profile: Profile) => this.editProfile(profile),
+    );
+  }
+
+  editProfile(profile: Profile){
+    this.profileForm.patchValue({
+      name: profile.name,
+      surname: profile.surname,
+      birthday: profile.birthday,
+      gender: profile.gender,
+      phoneNumber: profile.phoneNumber,
+      personalId: profile.personalId,
+    })
   }
 
   public getPersonalId() {
