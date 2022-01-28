@@ -43,8 +43,7 @@ export class FormFieldsComponent implements OnInit {
       surname: ['', Validators.required],
       birthday: ['', Validators.required,],
       gender: ['', Validators.required],
-      phoneNumber: ['86', [Validators.required,
-        Validators.minLength(11), Validators.maxLength(11)]],
+      phoneNumber: ['', [Validators.required, Validators.pattern("^((\\+370-?)|0)?[0-9]{8}$")]],
       personalId: [this.getPersonalId()],
     });
 
