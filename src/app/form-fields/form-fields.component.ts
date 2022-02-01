@@ -12,7 +12,7 @@ import {ActivatedRoute} from "@angular/router";
   selector: 'app-form-fields',
   templateUrl: './form-fields.component.html',
   styleUrls: ['./form-fields.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormFieldsComponent implements OnInit {
 
@@ -38,35 +38,35 @@ export class FormFieldsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
+    this.profileForm = this.formBuilder.group({ //create form data
+      name: ['', Validators.required, Validators.max(10)],
+      surname: ['', Validators.required, Validators.max(10)],
       birthday: ['', Validators.required,],
       gender: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.pattern("^((\\+370-?)|0)?[0-9]{8}$")]],
+      phoneNumber: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       personalId: [this.getPersonalId()],
     });
 
-    const datePipe = new DatePipe('en-Us');
-    this.now = datePipe.transform(new Date(), 'yyyy-MM-dd')
-    this.dataService.profileData.subscribe((item) => {
+    const datePipe = new DatePipe('en-Us'); //create date
+    this.now = datePipe.transform(new Date(), 'yyyy-MM-dd') // transform date to default date format
+    this.dataService.profileData.subscribe((item) => { //subscibe data that data show in table component and see all changes
       this.data = item;
-      this.cdr.markForCheck();
     });
+    this.data = this.dataService.getData(); // see all changes in localstorage
 
-    this.route.paramMap.subscribe(params => {
-      const profileId = params.get('id') as null;
-      if(profileId) {
-        this.getProfileData(profileId);
-      }
-    });
+    // this.route.paramMap.subscribe(params => {
+    //   const profileId = params.get('id') as null;
+    //   if(profileId) {
+    //     this.getProfileData(profileId);
+    //   }
+    // });
   }
 
-  getProfileData(id: number) {
-    this.dataService.getProfile(id).subscribe(
-      (profile: Profile) => this.editProfile(profile),
-    );
-  }
+  // getProfileData(id: number) {
+  //   this.dataService.getProfile(id).subscribe(
+  //     (profile: Profile) => this.editProfile(profile),
+  //   );
+  // }
 
   editProfile(profile: Profile){
     this.profileForm.patchValue({
@@ -79,11 +79,11 @@ export class FormFieldsComponent implements OnInit {
     })
   }
 
-  public getPersonalId() {
+  public getPersonalId() { // get personal id to each person
     return Math.floor((Math.random() * 100) + 1);
   };
 
-  public addData():void {
+  public addData():void { //submit form data if form is valid and sent data to data service
     if (this.profileForm.valid){
       this.dataService.setData(this.profileForm.value);
       this.profileForm.reset();

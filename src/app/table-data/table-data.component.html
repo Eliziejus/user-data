@@ -1,26 +1,33 @@
-<table class="table">
-  <thead>
+<table class="table sortable">
+  <thead class="text-center">
   <tr>
     <th scope="col">Row number</th>
     <th scope="col">Name</th>
-    <th [appSort]="profiles" data-order="desc" data-name="birthday" scope="col">Age</th>
+    <th [appSort]="profiles"
+        class="mouse-pointer sort-by"
+        data-order="desc"
+        data-name="birthday"
+        scope="col">
+      Age
+    </th>
     <th scope="col">Gerder</th>
     <th scope="col">Phone Number</th>
     <th scope="col">Personal ID</th>
+    <th scope="col"><button class="btn btn-danger" (click)="deleteAll()">Erase data</button></th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of profiles; let i = index">
-        <th scope="row">{{i+0}}</th>
-        <td>{{item.name}} {{item.surname}}</td>
-        <td>{{getDate(item.birthday)}}</td>
-        <td>{{item.gender}}</td>
-        <td><a href="tel: +{{item.phoneNumber}} ">{{item.phoneNumber}}</a></td>
-        <td>{{item.personalId}}</td>
+  <tr *ngFor="let item of profiles; let i = index" class="text-center">
+    <th scope="row">{{i + 1}}</th>
+    <td>{{item.name}} {{item.surname}}</td>
+    <td>{{getDate(item.birthday)}}</td>
+    <td>{{item.gender}}</td>
+    <td><a href="tel: {{item.phoneNumber}} ">{{item.phoneNumber}}</a></td>
+    <td>{{item.personalId}}</td>
 
     <td>
-      <button class="btn btn-outline-primary mr-2" (click)="editProfileData(i)">Edit</button>
-      <button class="btn btn-outline-danger mr-2" (click)="deteleTableItem(item.name, i)"> Delete</button>
+      <button class="btn btn-outline-primary m-2" (click)="editProfileData(i)">Edit</button>
+      <button class="btn btn-outline-danger" (click)="deteleTableItem(item.name, i)"> Delete</button>
     </td>
   </tr>
   </tbody>

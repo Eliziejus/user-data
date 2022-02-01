@@ -10,6 +10,7 @@ import {DataService} from "./services/data.service";
 import {HttpClientModule} from "@angular/common/http";
 import { SortDirective } from './directive/sort.directive';
 import {ConfirmBoxConfigModule, NgxAwesomePopupModule} from "@costlydeveloper/ngx-awesome-popup";
+import { EditPageComponent } from './edit-page/edit-page.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {ConfirmBoxConfigModule, NgxAwesomePopupModule} from "@costlydeveloper/ng
     HeaderComponent,
     TableDataComponent,
     SortDirective,
+    EditPageComponent,
   ],
   imports: [
     ReactiveFormsModule,
