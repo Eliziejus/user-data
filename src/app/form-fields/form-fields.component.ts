@@ -39,8 +39,8 @@ export class FormFieldsComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileForm = this.formBuilder.group({ //create form data
-      name: ['', Validators.required, Validators.max(10)],
-      surname: ['', Validators.required, Validators.max(10)],
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
       birthday: ['', Validators.required,],
       gender: ['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
