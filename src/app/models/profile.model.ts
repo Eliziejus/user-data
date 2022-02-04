@@ -4,5 +4,5 @@ export interface Profile {
   birthday: string,
   gender: string,
   phoneNumber: string,
-  personalId: string,
+  personalId: number,
 }

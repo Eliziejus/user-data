@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, Input, OnChanges} from '@angular/core';
 import {Profile} from "../models/profile.model";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Router } from "@angular/router";
 import {DataService} from "../services/data.service";
 
 @Component({

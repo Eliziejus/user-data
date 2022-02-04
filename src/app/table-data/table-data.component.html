@@ -24,12 +24,12 @@
     <td data-label="Personal ID">{{item.personalId}}</td>
 
     <td>
-      <button class="btn btn-outline-primary m-2" (click)="editProfileData(i)">Edit</button>
+      <button class="btn btn-outline-primary m-2" (click)="editProfileData(item.personalId)">Edit</button>
       <button class="btn btn-outline-danger" (click)="deteleTableItem(item.name, i)"> Delete</button>
     </td>
   </tr>
   </tbody>
 </table>
 
-<button class="btn btn-danger" (click)="deleteAll()">Erase data</button>
+<button class="btn btn-danger m-4" (click)="deleteAll()">Erase data</button>
 

@@ -11,6 +11,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { SortDirective } from './directive/sort.directive';
 import {ConfirmBoxConfigModule, NgxAwesomePopupModule} from "@costlydeveloper/ngx-awesome-popup";
 import { EditPageComponent } from './edit-page/edit-page.component';
+import { OverviewPageComponent } from './overview-page/overview-page.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { EditPageComponent } from './edit-page/edit-page.component';
     TableDataComponent,
     SortDirective,
     EditPageComponent,
+    OverviewPageComponent,
   ],
   imports: [
     ReactiveFormsModule,

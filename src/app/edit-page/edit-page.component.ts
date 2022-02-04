@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {DataService} from "../services/data.service";
+import {Profile} from "../models/profile.model";
 
 @Component({
   selector: 'app-edit-page',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditPageComponent implements OnInit {
 
-  constructor() { }
+  public profileData: Profile;
+
+  constructor(private route: ActivatedRoute, private dataService: DataService) {
+  }
 
   ngOnInit(): void {
+    this.profileData = this.dataService.getProfileById(parseInt(this.route.snapshot.params['id'], 10));
+  }
+
+  public updateProfile(profile: Profile) {
+    this.dataService.updateProfile(profile);
   }
 
 }
