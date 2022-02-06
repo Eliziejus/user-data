@@ -13,7 +13,6 @@ export class DataService {
     value.sort((a: Profile, b: Profile) => {
       return this.getAge(a.birthday) - this.getAge(b.birthday)
     });
-    console.log(value);
     this.profileData.next(value);
     localStorage.setItem('app', JSON.stringify(value));
   }
@@ -31,7 +30,7 @@ export class DataService {
     const profiles = JSON.parse(localStorage.getItem('app') || '[]');
     profiles.forEach((profileItem: Profile) => {
       if (profileItem.personalId === profile.personalId) {
-        profileItem = profile;
+        profileItem = {...profile};
       }
     });
     this.profileData.next(profiles);
@@ -43,22 +42,16 @@ export class DataService {
       this.initStorage();
     }
     const data = (JSON.parse(localStorage.getItem('app') || '[]') as Profile[]).find((item) => item.personalId === id);
-    debugger;
     if (!data) {
       return {} as Profile
     }
     return data;
   }
 
-  public getAge(birthday: string) { // convert date to age
+  public getAge(birthday: string) { // convert date to age TODO paskaityti skirtumus part let ir const
     let today = new Date(); //set today date
     let birth = new Date(birthday); //set selected date from form
     let age = today.getFullYear() - birth.getFullYear(); // calculate age
     return age;
   }
 }
-
-
-//TODO truskta rodyklės prie age sortinimo
-//TODO Literaliai paziureti ar visus punktus ivykdyti ir pratestuoti
-// Padaryti su message kurie informuoti ar tai neužpildytas ar neatitinka validacijos

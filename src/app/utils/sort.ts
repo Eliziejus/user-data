@@ -23,7 +23,7 @@ export class Sort {
       }
     }
   }
-
+ //TODO analize this code because IT need this!!!!! DONT COPY FROM INTERNET IF YOU DONT KNOW koda rasyti pats :)
   private sortData(a: any, b: any) {
     if (a < b) {
       return -1 * this.sortOrder;

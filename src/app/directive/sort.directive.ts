@@ -32,7 +32,7 @@ export class SortDirective {
       this.appSort.sort(sort.startSort(property, order, type));
       elem.setAttribute(SortEnum.DataOrder, SortEnum.Desc);
     }
-
+  //TODO turi padaryti kad butu maziau eiluciu bet functionalus išliktu
   }
 
 }

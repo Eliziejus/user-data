@@ -20,7 +20,6 @@ import {ActivatedRoute, Router} from "@angular/router";
   selector: 'app-form-fields',
   templateUrl: './form-fields.component.html',
   styleUrls: ['./form-fields.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormFieldsComponent implements OnInit {
 
@@ -40,12 +39,11 @@ export class FormFieldsComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dataService: DataService,
   ) {
   }
 
   ngOnInit(): void {
-    const datePipe = new DatePipe('en-Us'); //create date
+    const datePipe = new DatePipe('en-Us'); //create date //TODO sutaisyti datos formata i Europos laika
     this.now = datePipe.transform(new Date(), 'yyyy-MM-dd') // transform date to default date format
 
     this.profileForm = this.formBuilder.group({ //create form data
@@ -53,23 +51,22 @@ export class FormFieldsComponent implements OnInit {
       surname: ['', Validators.required],
       birthday: ['', Validators.required,],
       gender: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      phoneNumber: ['', [Validators.required, Validators.pattern("^((\\+370-?)|0)?[0-9]{11}$")]], // TODO sutaisyti numerio validacija
     });
 
     if (this.formValue) {
       this.editProfile(this.formValue);
     }
-
   }
 
 
-  editProfile(profile: Profile) {
+  editProfile(profile: Profile) {//TODO read about private protected and public function
     this.profileForm.patchValue({
       name: profile.name,
       surname: profile.surname,
       birthday: profile.birthday,
       gender: profile.gender,
-      phoneNumber: profile.phoneNumber,
+      phoneNumber: profile.phoneNumber, //TODO pass profile as values
     })
   }
 

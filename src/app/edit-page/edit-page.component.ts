@@ -16,7 +16,7 @@ export class EditPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileData = this.dataService.getProfileById(parseInt(this.route.snapshot.params['id'], 10));
+    this.profileData = this.dataService.getProfileById(parseInt(this.route.snapshot.params['id'], 10)); // radix you can parse
   }
 
   public updateProfile(profile: Profile) {

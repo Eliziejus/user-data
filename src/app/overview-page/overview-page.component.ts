@@ -14,7 +14,7 @@ export class OverviewPageComponent implements OnInit {
 
   public profilesList: Profile[];
 
-  ngOnInit(): void {
+  ngOnInit(): void {  //TODO more analalyze code...
     this.dataService.initStorage();
     this.dataService.profileData.subscribe((profiles) => {
       this.profilesList = profiles;
