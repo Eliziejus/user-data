@@ -16,7 +16,7 @@
     </div>
     <div class="form-group">
       <label>Birthday</label>
-      <input [readOnly]="profileForm.controls['name'].invalid || profileForm.controls['surname'].invalid  " type="date" class="form-control" [max]="now" formControlName="birthday" placeholder="Enter Birthday">
+      <input [readOnly]="profileForm.controls['name'].invalid || profileForm.controls['surname'].invalid" type="datetime-local" placeholder="jadsadshblasd" class="form-control" [max]="now" formControlName="birthday">
       <span class="error" *ngIf="profileForm.controls['birthday'].invalid && profileForm.controls['birthday'].touched">Birthday is required</span>
       <br>
     </div>

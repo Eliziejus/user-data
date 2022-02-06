@@ -1,19 +1,16 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   EventEmitter,
-  Input,
+  Input, NgModule,
   OnInit,
   Output
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DataService} from "../services/data.service";
 import {Gender} from "../models/gender.model";
 import {countries} from "../country-data-store";
 import {DatePipe} from "@angular/common";
 import {Profile} from "../models/profile.model";
-import {ActivatedRoute, Router} from "@angular/router";
+
 
 
 @Component({
@@ -44,7 +41,7 @@ export class FormFieldsComponent implements OnInit {
 
   ngOnInit(): void {
     const datePipe = new DatePipe('en-Us'); //create date //TODO sutaisyti datos formata i Europos laika
-    this.now = datePipe.transform(new Date(), 'yyyy-MM-dd') // transform date to default date format
+    this.now = datePipe.transform(new Date()) // transform date to default date format
 
     this.profileForm = this.formBuilder.group({ //create form data
       name: ['', Validators.required],
@@ -60,7 +57,7 @@ export class FormFieldsComponent implements OnInit {
   }
 
 
-  editProfile(profile: Profile) {//TODO read about private protected and public function
+  private editProfile(profile: Profile) {//TODO read about private protected and public function
     this.profileForm.patchValue({
       name: profile.name,
       surname: profile.surname,

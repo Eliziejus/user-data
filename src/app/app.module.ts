@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormFieldsComponent } from './form-fields/form-fields.component';
@@ -12,6 +12,8 @@ import { SortDirective } from './directive/sort.directive';
 import {ConfirmBoxConfigModule, NgxAwesomePopupModule} from "@costlydeveloper/ngx-awesome-popup";
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
+import {GetDataPipe} from "./pipes/get-data.pipe";
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
     SortDirective,
     EditPageComponent,
     OverviewPageComponent,
+    GetDataPipe,
   ],
   imports: [
     ReactiveFormsModule,
@@ -31,7 +34,7 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
     NgxAwesomePopupModule.forRoot(),
     ConfirmBoxConfigModule.forRoot()
   ],
-  providers: [DataService],
+  providers: [DataService,  { provide: LOCALE_ID, useValue: 'fr-FR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

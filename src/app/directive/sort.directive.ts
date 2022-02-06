@@ -25,13 +25,10 @@ export class SortDirective {
 
     const property = elem.getAttribute(SortEnum.DataName);
 
-    if (order === "desc") {
       this.appSort.sort(sort.startSort(property, order, type));
-      elem.setAttribute(SortEnum.DataOrder, SortEnum.Asc);
-    } else {
-      this.appSort.sort(sort.startSort(property, order, type));
-      elem.setAttribute(SortEnum.DataOrder, SortEnum.Desc);
-    }
+      'desc' ? elem.setAttribute(SortEnum.DataOrder, SortEnum.Asc) : elem.setAttribute(SortEnum.DataOrder, SortEnum.Desc);
+      // this.appSort.sort(sort.startSort(property, order, type));
+      // elem.setAttribute(SortEnum.DataOrder, SortEnum.Desc);
   //TODO turi padaryti kad butu maziau eiluciu bet functionalus išliktu
   }
 

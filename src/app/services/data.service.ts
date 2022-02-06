@@ -48,10 +48,16 @@ export class DataService {
     return data;
   }
 
-  public getAge(birthday: string) { // convert date to age TODO paskaityti skirtumus part let ir const
+  public getAge(birthday: string) { // convert date to age
     let today = new Date(); //set today date
     let birth = new Date(birthday); //set selected date from form
     let age = today.getFullYear() - birth.getFullYear(); // calculate age
     return age;
+  }
+
+  public deleteAll(): void { // Erase all data form table and localstorage
+    if (confirm("Are you sure to erase all profiles? ")) {
+      localStorage.removeItem('app'); //remove all data form LocalStorage
+    }
   }
 }
