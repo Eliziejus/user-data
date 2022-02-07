@@ -26,10 +26,8 @@ export class SortDirective {
     const property = elem.getAttribute(SortEnum.DataName);
 
       this.appSort.sort(sort.startSort(property, order, type));
-      'desc' ? elem.setAttribute(SortEnum.DataOrder, SortEnum.Asc) : elem.setAttribute(SortEnum.DataOrder, SortEnum.Desc);
-      // this.appSort.sort(sort.startSort(property, order, type));
-      // elem.setAttribute(SortEnum.DataOrder, SortEnum.Desc);
-  //TODO turi padaryti kad butu maziau eiluciu bet functionalus išliktu
+      (order === SortEnum.Desc) ? elem.setAttribute(SortEnum.DataOrder, SortEnum.Asc) : elem.setAttribute(SortEnum.DataOrder, SortEnum.Desc);
+
   }
 
 }

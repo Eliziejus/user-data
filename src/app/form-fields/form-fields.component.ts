@@ -1,11 +1,11 @@
 import {
-  Component,
+  Component, ElementRef,
   EventEmitter,
   Input, NgModule,
   OnInit,
   Output
 } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validator, Validators} from "@angular/forms";
 import {Gender} from "../models/gender.model";
 import {countries} from "../country-data-store";
 import {DatePipe} from "@angular/common";
@@ -40,15 +40,15 @@ export class FormFieldsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const datePipe = new DatePipe('en-Us'); //create date //TODO sutaisyti datos formata i Europos laika
-    this.now = datePipe.transform(new Date()) // transform date to default date format
+    const datePipe = new DatePipe('en-Us'); //create date //TODO sutaisyti datos formata i Europos laika // neimanoma nes yra default
+    this.now = datePipe.transform(new Date, 'yyyy-MM-dd') // transform date to default date format
 
     this.profileForm = this.formBuilder.group({ //create form data
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(14)]],
       surname: ['', Validators.required],
-      birthday: ['', Validators.required,],
+      birthday: ['', Validators.required],
       gender: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.pattern("^((\\+370-?)|0)?[0-9]{11}$")]], // TODO sutaisyti numerio validacija
+      phoneNumber: ['', [Validators.required, Validators.pattern("^[0-9]*$")]], // TODO sutaisyti numerio validacija
     });
 
     if (this.formValue) {
@@ -57,13 +57,9 @@ export class FormFieldsComponent implements OnInit {
   }
 
 
-  private editProfile(profile: Profile) {//TODO read about private protected and public function
+  private editProfile(profile: Profile) {
     this.profileForm.patchValue({
-      name: profile.name,
-      surname: profile.surname,
-      birthday: profile.birthday,
-      gender: profile.gender,
-      phoneNumber: profile.phoneNumber, //TODO pass profile as values
+      ...profile
     })
   }
 
@@ -77,4 +73,22 @@ export class FormFieldsComponent implements OnInit {
       this.profileForm.reset();
     }
   }
+
+  public getErrorMessage() {
+    if (this.profileForm.controls['name'].hasError('required')) {
+      if (this.profileForm.controls['name'].hasError('maxLength')) {
+        console.log('hellosdh');
+        return 'Validation is not correct';
+      }
+      return 'You must enter a value';
+    }
+    return '';
+  }
+
+  public dataInputClick(elementRef: HTMLElement) {
+    if (this.profileForm.controls['name'].valid && this.profileForm.controls['surname'].valid){
+      elementRef.focus();
+    }
+  }
+
 }

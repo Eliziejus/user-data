@@ -1,3 +1,24 @@
 .error {
   color: red;
 }
+.placeholder {
+  border: 1px solid #ced4da;
+  border-right: none;
+  border-radius: .25rem;
+  color: #212529;
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  z-index: 9;
+  opacity: 1;
+  padding-left: .75rem;
+  &.disable {
+    background: #e9ecef;
+    cursor: context-menu;
+  }
+}

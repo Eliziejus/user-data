@@ -18,7 +18,7 @@
   <tr *ngFor="let item of profiles; let i = index" class="text-center">
     <td data-label="Row number">{{i + 1}}</td>
     <td data-label="Name">{{item.name}} {{item.surname}}</td>
-    <td data-label="Gender">{{item.birthday  | getDate}}</td>
+    <td data-label="Gender">{{item.birthday  | getDate }}</td>
     <td data-label="Row number">{{item.gender}}</td>
     <td data-label="Phone Number"><a href="tel: {{item.phoneNumber}} ">{{item.phoneNumber}}</a></td>
     <td data-label="Personal ID">{{item.personalId}}</td>

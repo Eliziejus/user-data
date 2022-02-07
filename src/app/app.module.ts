@@ -34,7 +34,7 @@ import {GetDataPipe} from "./pipes/get-data.pipe";
     NgxAwesomePopupModule.forRoot(),
     ConfirmBoxConfigModule.forRoot()
   ],
-  providers: [DataService,  { provide: LOCALE_ID, useValue: 'fr-FR' }],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
