@@ -48,7 +48,7 @@ export class FormFieldsComponent implements OnInit {
       surname: ['', Validators.required],
       birthday: ['', Validators.required],
       gender: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.pattern("^[0-9]*$")]], // TODO sutaisyti numerio validacija
+      phoneNumber: ['', [Validators.required, Validators.pattern("[0-9]{9}")]], // TODO sutaisyti numerio validacija
     });
 
     if (this.formValue) {
@@ -76,11 +76,10 @@ export class FormFieldsComponent implements OnInit {
 
   public getErrorMessage() {
     if (this.profileForm.controls['name'].hasError('required')) {
-      if (this.profileForm.controls['name'].hasError('maxLength')) {
-        console.log('hellosdh');
-        return 'Validation is not correct';
-      }
-      return 'You must enter a value';
+      return 'Name is required';
+    }if (this.profileForm.controls['name'].hasError('maxLength')) {
+      console.log('hellosdh');
+      return 'Validation is not correct';
     }
     return '';
   }

@@ -5,25 +5,20 @@
       <label>Name</label>
       <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="name"
              placeholder="Enter first name">
-      <div *ngIf="profileForm.controls['name'].invalid
-       && profileForm.controls['name'].errors &&
-       (profileForm.controls['name'].dirty || profileForm.controls['name'].touched)">
-        <small class="error" *ngIf="profileForm.controls['name'].hasError('required')">This field is required</small>
-      </div>
-<!--      <small class="error" *ngIf="profileForm.controls['name'].invalid">{{getErrorMessage()}}</small>-->
+      <small class="error" *ngIf="profileForm.controls['name'].invalid && profileForm.controls['name'].touched">{{getErrorMessage()}}</small>
       <br>
     </div>
     <div class="form-group">
       <label>Surname</label>
       <input type="text" id="surname" class="form-control" formControlName="surname" placeholder="Enter Surname">
-      <span class="error" *ngIf="profileForm.controls['surname'].invalid && profileForm.controls['surname'].touched">Surname is required</span>
+      <small class="error" *ngIf="profileForm.controls['surname'].invalid && profileForm.controls['surname'].touched">Surname is required</small>
       <br>
     </div>
     <div class="form-group">
       <label>Birthday</label>
       <div class="position-relative">
         <div class="placeholder" *ngIf="profileForm.controls['birthday'].invalid" (click)="dataInputClick(dataInput)" [ngClass]="{'disable':profileForm.controls['name'].invalid || profileForm.controls['surname'].invalid}">
-          <span class="pl-2">{{profileForm.controls['birthday'].value || 'yyyy-MM-dd'}}</span></div>
+          <small class="pl-2">{{profileForm.controls['birthday'].value || 'yyyy-MM-dd'}}</small></div>
         <input #dataInput [readOnly]="profileForm.controls['name'].invalid || profileForm.controls['surname'].invalid" type="date" placeholder="YYYY-MM-DD" class="form-control" [max]="now" formControlName="birthday">
       </div>
       <span class="error" *ngIf="profileForm.controls['birthday'].invalid && profileForm.controls['birthday'].touched">Birthday is required</span>
@@ -35,13 +30,13 @@
         <option value="" disabled> Select your gender</option>
         <option *ngFor="let gender of genderArray" [ngValue]="gender.value">{{gender.value}}</option>
       </select>
-      <span class="error" *ngIf="profileForm.controls['gender'].invalid && profileForm.controls['gender'].touched">Gender is required</span>
+      <small class="error" *ngIf="profileForm.controls['gender'].invalid && profileForm.controls['gender'].touched">Gender is required</small>
       <br>
     </div>
     <div class="form-group">
       <label>PhoneNumber</label>
       <input class="form-control" name="phoneNumber" id="phoneNumber" formControlName="phoneNumber">
-      <span class="error" *ngIf="profileForm.controls['phoneNumber'].invalid && profileForm.controls['phoneNumber'].touched">Phone number is required</span>
+      <small class="error" *ngIf="profileForm.controls['phoneNumber'].invalid && profileForm.controls['phoneNumber'].touched">Phone number is required</small>
       <br>
     </div>
     <button type="submit" class="btn btn-danger m-1" [disabled]="profileForm.invalid">Submit</button>
