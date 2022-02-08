@@ -40,7 +40,7 @@ export class FormFieldsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const datePipe = new DatePipe('en-Us'); //create date //TODO sutaisyti datos formata i Europos laika // neimanoma nes yra default
+    const datePipe = new DatePipe('en-Us'); //create date
     this.now = datePipe.transform(new Date, 'yyyy-MM-dd') // transform date to default date format
 
     this.profileForm = this.formBuilder.group({ //create form data
@@ -48,7 +48,7 @@ export class FormFieldsComponent implements OnInit {
       surname: ['', Validators.required],
       birthday: ['', Validators.required],
       gender: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.pattern("[0-9]{9}")]], // TODO sutaisyti numerio validacija
+      phoneNumber: ['', [Validators.required, Validators.pattern("[0-9]{9}")]],
     });
 
     if (this.formValue) {
