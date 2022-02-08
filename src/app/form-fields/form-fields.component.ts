@@ -25,7 +25,14 @@ export class FormFieldsComponent implements OnInit {
   public countries = countries;
   public profileForm: FormGroup;
   public now: string | null;
-
+private errorObject = {
+  required: {
+    message: 'Field required'
+  },
+  minlength: {
+    message: 'text is too short'
+  }
+}
 
   genderArray = [
     new Gender('1', 'Male'),
@@ -76,14 +83,10 @@ export class FormFieldsComponent implements OnInit {
     }
   }
 
-  public getErrorMessage() {
-    if (this.profileForm.controls['name'].hasError('required')) {
-      return 'Name is required';
-    }if (this.profileForm.controls['name'].hasError('minlength')) {
-      console.log('hellosdh');
-      return 'Validation is not correct';
-    }
-    return '';
+  public getErrorMessage(field: string) {
+    const errorKeys = Object.keys(this.profileForm.controls[field].errors || {});
+    // @ts-ignore // TODO Sutaisyti error ir panaikinti error
+    return errorKeys ? (this.errorObject[errorKeys[0] as any] as unknown as any).message: '';
   }
 
   public dataInputClick(elementRef: HTMLElement) {

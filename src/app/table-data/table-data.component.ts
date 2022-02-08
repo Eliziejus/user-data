@@ -20,7 +20,7 @@ export class TableDataComponent{
   public deteleTableItem(name: string, id: number) { // Delete selected row in localstorage and table
     if (confirm("Are you sure to delete " + name)) { // pop up confirmation if user really wanna delete person
       this.profiles.splice(id, 1);
-      localStorage.setItem('app', JSON.stringify(this.profiles));
+      localStorage.setItem('app', JSON.stringify(this.profiles)); // TODO perkelti i data service ir
     }
   }
 
