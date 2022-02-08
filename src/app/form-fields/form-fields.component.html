@@ -5,7 +5,7 @@
       <label>Name</label>
       <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="name"
              placeholder="Enter first name">
-      <small class="error" *ngIf="profileForm.controls['name'].invalid && profileForm.controls['name'].touched">Field is not filled or incorrect validation</small>
+      <small class="error" *ngIf="profileForm.controls['name'].invalid && (profileForm.controls['name'].touched || !!profileForm.controls['name'].value)">{{getErrorMessage()}}</small>
       <br>
     </div>
     <div class="form-group">

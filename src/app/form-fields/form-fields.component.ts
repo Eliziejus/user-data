@@ -38,7 +38,9 @@ export class FormFieldsComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {
   }
-
+  public toString(value: any): string {
+    return JSON.stringify(value)
+  }
   ngOnInit(): void {
     const datePipe = new DatePipe('en-Us'); //create date
     this.now = datePipe.transform(new Date, 'yyyy-MM-dd') // transform date to default date format
@@ -59,7 +61,7 @@ export class FormFieldsComponent implements OnInit {
 
   private editProfile(profile: Profile) {
     this.profileForm.patchValue({
-      ...profile
+      ...profile //TODO sukurti pipe kad konvertuotu i musu time zone
     })
   }
 
@@ -77,7 +79,7 @@ export class FormFieldsComponent implements OnInit {
   public getErrorMessage() {
     if (this.profileForm.controls['name'].hasError('required')) {
       return 'Name is required';
-    }if (this.profileForm.controls['name'].hasError('maxLength')) {
+    }if (this.profileForm.controls['name'].hasError('minlength')) {
       console.log('hellosdh');
       return 'Validation is not correct';
     }
