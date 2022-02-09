@@ -4,9 +4,6 @@ import {Profile} from "../models/profile.model";
 export class DataService {
   public profileData = new BehaviorSubject<Profile[]>([]);
 
-  constructor() {
-  }
-
   public setData(profile: Profile) { // Set Data to localStorage, also change behaviorSubject
     const value = JSON.parse(localStorage.getItem('app') || '[]')
     value.push(profile); // Add new array in current array
