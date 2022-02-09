@@ -11,7 +11,7 @@
     <div class="form-group">
       <label>Surname</label>
       <input type="text" id="surname" class="form-control" formControlName="surname" placeholder="Enter Surname">
-      <small class="error" *ngIf="profileForm.controls['surname'].invalid && profileForm.controls['surname'].touched">Field is not filled or incorrect validation</small>
+      <small class="error" *ngIf="profileForm.controls['surname'].invalid && profileForm.controls['surname'].touched">{{getErrorMessage('surname')}}</small>
       <br>
     </div>
     <div class="form-group">
@@ -24,10 +24,14 @@
         <input #dataInput [readOnly]="profileForm.controls['name'].invalid || profileForm.controls['surname'].invalid"
                type="date"
                class="form-control"
-               formControlName="birthday">
+               formControlName="birthday"
+               data-provide="datepicker"
+               data-date-format="yyyy-mm-dd">
+        <div class="placeholder"
+             [hidden]="profileForm.controls['birthday'].invalid">{{profileForm.controls['birthday'].value}}</div>
       </div>
       <span class="error" *ngIf="profileForm.controls['birthday'].invalid
-      && profileForm.controls['birthday'].touched">Field is not filled or incorrect validation</span>
+      && profileForm.controls['birthday'].touched">{{getErrorMessage('birthday')}}</span>
       <br>
     </div>
     <div class="form-group">
@@ -37,14 +41,14 @@
         <option *ngFor="let gender of genderArray" [ngValue]="gender.value">{{gender.value}}</option>
       </select>
       <small class="error" *ngIf="profileForm.controls['gender'].invalid
-      && profileForm.controls['gender'].touched">Field is not filled or incorrect validation</small>
+      && profileForm.controls['gender'].touched">{{getErrorMessage('gender')}}</small>
       <br>
     </div>
     <div class="form-group">
       <label>PhoneNumber</label>
       <input class="form-control" name="phoneNumber" id="phoneNumber" formControlName="phoneNumber">
       <small class="error" *ngIf="profileForm.controls['phoneNumber'].invalid
-      && profileForm.controls['phoneNumber'].touched">Field is not filled or incorrect validation</small>
+      && profileForm.controls['phoneNumber'].touched">{{getErrorMessage('phoneNumber')}}</small>
       <br>
     </div>
     <button type="submit" class="btn btn-danger m-1" [disabled]="profileForm.invalid">Submit</button>

@@ -25,12 +25,12 @@ export class FormFieldsComponent implements OnInit {
   public countries = countries;
   public profileForm: FormGroup;
   public now: string | null;
-private errorObject = {
+  private errorObject: any = { // Its the only way to solve one error
   required: {
     message: 'Field required'
   },
   minlength: {
-    message: 'text is too short'
+    message: 'Text is too short'
   }
 }
 
@@ -53,11 +53,11 @@ private errorObject = {
     this.now = datePipe.transform(new Date, 'yyyy-MM-dd') // transform date to default date format
 
     this.profileForm = this.formBuilder.group({ //create form data
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(14)]],
-      surname: ['', Validators.required],
-      birthday: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      surname: ['', [Validators.required, Validators.minLength(3)]],
+      birthday: ['', [Validators.required, Validators.minLength(3)]],
       gender: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.pattern("[0-9]{9}")]],
+      phoneNumber: ['', [Validators.required, Validators.pattern("[0-9]{9}"), Validators.minLength(3)]],
     });
 
     if (this.formValue) {
@@ -68,7 +68,7 @@ private errorObject = {
 
   private editProfile(profile: Profile) {
     this.profileForm.patchValue({
-      ...profile //TODO sukurti pipe kad konvertuotu i musu time zone
+      ...profile
     })
   }
 
@@ -85,8 +85,7 @@ private errorObject = {
 
   public getErrorMessage(field: string) {
     const errorKeys = Object.keys(this.profileForm.controls[field].errors || {});
-    // @ts-ignore // TODO Sutaisyti error ir panaikinti error
-    return errorKeys ? (this.errorObject[errorKeys[0] as any] as unknown as any).message: '';
+    return errorKeys ? (this.errorObject[errorKeys[0]]).message: '';
   }
 
   public dataInputClick(elementRef: HTMLElement) {
@@ -94,5 +93,6 @@ private errorObject = {
       elementRef.focus();
     }
   }
+
 
 }
