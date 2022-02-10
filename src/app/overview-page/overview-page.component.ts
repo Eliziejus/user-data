@@ -14,14 +14,14 @@ export class OverviewPageComponent implements OnInit {
 
   public profilesList: Profile[];
 
-  ngOnInit(): void {  //TODO more analalyze code...
+  public ngOnInit(): void {  //TODO more analalyze code...
     this.dataService.initStorage();
     this.dataService.profileData.subscribe((profiles) => {
       this.profilesList = profiles;
     })
   }
 
-  public saveProfile(profile: Profile) {
+  public saveProfile(profile: Profile): void {
     this.dataService.setData(profile);
   }
 

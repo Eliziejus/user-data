@@ -11,11 +11,11 @@ export class Sort {
   constructor() {
   }
 
-  public startSort(property: any, order: any, type = "") {
+  public startSort(property: number, order: string, type = "") {
     if (order === SortEnum.Desc) {
       this.sortOrder = -1;
     }
-    return (a: any, b: any) => {
+    return (a: string, b: string) => {
       if (type === SortEnum.Date) {
         return this.sortData(new Date(a[property]), new Date(b[property]));
       } else {
@@ -24,7 +24,7 @@ export class Sort {
     }
   }
  //TODO analize this code because IT need this!!!!! DONT COPY FROM INTERNET IF YOU DONT KNOW koda rasyti pats :)
-  private sortData(a: any, b: any) {
+  private sortData(a: any, b: any): number {
     if (a < b) {
       return -1 * this.sortOrder;
     } else if (a > b) {

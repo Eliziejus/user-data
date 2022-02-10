@@ -15,20 +15,21 @@ export class TableDataComponent {
   constructor(private cdr: ChangeDetectorRef, private router: Router, private dataService: DataService) {
   }
 
-  public deteleTableItem(name: string, id: number) { // Delete selected row in localstorage and table
+  public deteleTableItem(name: string, id: number): void { // Delete selected row in localstorage and table
     if (confirm(`Are you sure to delete ${name}`)) { // pop up confirmation if user really wanna delete person
       this.profiles.splice(id, 1);
-      localStorage.setItem('app', JSON.stringify(this.profiles));
     }
   }
 
-  public editProfileData(id: number) {
+  public editProfileData(id: number): void {
     this.router.navigate(['/edit', id]) // redirect to edit page by id
   }
 
   public delete(): void {
-    this.dataService.deleteAll();
-    this.profiles = [];
+    if (confirm('Are you sure to erase all profiles?')) {
+      this.dataService.deleteAll();
+      this.profiles = [];
+    }
 
   }
 

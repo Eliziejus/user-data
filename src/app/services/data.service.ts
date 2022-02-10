@@ -4,7 +4,7 @@ import {Profile} from "../models/profile.model";
 export class DataService {
   public profileData = new BehaviorSubject<Profile[]>([]);
 
-  public setData(profile: Profile) { // Set Data to localStorage, also change behaviorSubject
+  public setData(profile: Profile): void { // Set Data to localStorage, also change behaviorSubject
     const value = JSON.parse(localStorage.getItem('app') || '[]')
     value.push(profile); // Add new array in current array
     value.sort((a: Profile, b: Profile) => {
@@ -14,7 +14,7 @@ export class DataService {
     localStorage.setItem('app', JSON.stringify(value));
   }
 
-  public initStorage() {
+  public initStorage(): void {
     const data = JSON.parse(localStorage.getItem('app') || '[]');
     data.sort((a: Profile, b: Profile) => {
       return this.getAge(a.birthday) - this.getAge(b.birthday)
@@ -45,7 +45,7 @@ export class DataService {
     return data;
   }
 
-  public getAge(birthday: string) { // convert date to age
+  public getAge(birthday: string): number { // convert date to age
     let today = new Date(); //set today date
     let birth = new Date(birthday); //set selected date from form
     let age = today.getFullYear() - birth.getFullYear(); // calculate age
@@ -53,8 +53,11 @@ export class DataService {
   }
 
   public deleteAll(): void { // Erase all data form table and localstorage
-    if (confirm("Are you sure to erase all profiles? ")) {
       localStorage.removeItem('app'); //remove all data form LocalStorage
-    }
+  }
+
+  public deleteItem(): void {
+    localStorage.setItem('app', JSON.stringify(this.profileData));
+
   }
 }

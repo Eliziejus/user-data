@@ -1,37 +1,36 @@
 <form [formGroup]="profileForm" (ngSubmit)="save()">
-  <br> ???
   <div class="container">
     <div class="form-group">
       <label>Name</label>
       <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="name"
              placeholder="Enter first name">
-      <small class="error" *ngIf="profileForm.controls['name'].invalid && (profileForm.controls['name'].touched || !!profileForm.controls['name'].value)">{{getErrorMessage('name')}}</small>
+      <small class="error" *ngIf="profileForm.controls[field.Name].invalid && (profileForm.controls[field.Name].touched || !!profileForm.controls[field.Name].value)">{{getErrorMessage(field.Name)}}</small>
       <br>
     </div>
     <div class="form-group">
       <label>Surname</label>
       <input type="text" id="surname" class="form-control" formControlName="surname" placeholder="Enter Surname">
-      <small class="error" *ngIf="profileForm.controls['surname'].invalid && profileForm.controls['surname'].touched">{{getErrorMessage('surname')}}</small>
+      <small class="error" *ngIf="profileForm.controls[field.Surname].invalid && profileForm.controls[field.Surname].touched">{{getErrorMessage(field.Surname)}}</small>
       <br>
     </div>
     <div class="form-group">
       <label>Birthday</label>
       <div class="position-relative">
-        <div class="placeholder" *ngIf="profileForm.controls['birthday'].invalid"
+        <div class="placeholder" *ngIf="profileForm.controls[field.Birthday].invalid"
              (click)="dataInputClick(dataInput)"
-             [ngClass]="{'disable':profileForm.controls['name'].invalid || profileForm.controls['surname'].invalid}">
-          <small class="pl-2">{{profileForm.controls['birthday'].value || 'yyyy-MM-dd'}}</small></div>
-        <input #dataInput [readOnly]="profileForm.controls['name'].invalid || profileForm.controls['surname'].invalid"
+             [ngClass]="{'disable':profileForm.controls[field.Name].invalid || profileForm.controls[field.Surname].invalid}">
+          <small class="pl-2">{{profileForm.controls[field.Birthday].value || 'yyyy-MM-dd'}}</small></div>
+        <input #dataInput [readOnly]="profileForm.controls[field.Name].invalid || profileForm.controls[field.Surname].invalid"
                type="date"
                class="form-control"
                formControlName="birthday"
                data-provide="datepicker"
                data-date-format="yyyy-mm-dd">
         <div class="placeholder"
-             [hidden]="profileForm.controls['birthday'].invalid">{{profileForm.controls['birthday'].value}}</div>
+             [hidden]="profileForm.controls[field.Birthday].invalid">{{profileForm.controls[field.Birthday].value}}</div>
       </div>
-      <span class="error" *ngIf="profileForm.controls['birthday'].invalid
-      && profileForm.controls['birthday'].touched">{{getErrorMessage('birthday')}}</span>
+      <span class="error" *ngIf="profileForm.controls[field.Birthday].invalid
+      && profileForm.controls[field.Birthday].touched">{{getErrorMessage(field.Birthday)}}</span>
       <br>
     </div>
     <div class="form-group">
@@ -40,15 +39,15 @@
         <option value="" disabled> Select your gender</option>
         <option *ngFor="let gender of genderArray" [ngValue]="gender.value">{{gender.value}}</option>
       </select>
-      <small class="error" *ngIf="profileForm.controls['gender'].invalid
-      && profileForm.controls['gender'].touched">{{getErrorMessage('gender')}}</small>
+      <small class="error" *ngIf="profileForm.controls[field.Gender].invalid
+      && profileForm.controls[field.Gender].touched">{{getErrorMessage(field.Gender)}}</small>
       <br>
     </div>
     <div class="form-group">
       <label>PhoneNumber</label>
       <input class="form-control" name="phoneNumber" id="phoneNumber" formControlName="phoneNumber">
-      <small class="error" *ngIf="profileForm.controls['phoneNumber'].invalid
-      && profileForm.controls['phoneNumber'].touched">{{getErrorMessage('phoneNumber')}}</small>
+      <small class="error" *ngIf="profileForm.controls[field.PhoneNumber].invalid
+      && profileForm.controls[field.PhoneNumber].touched">{{getErrorMessage(field.PhoneNumber)}}</small>
       <br>
     </div>
     <button type="submit" class="btn btn-danger m-1" [disabled]="profileForm.invalid">Submit</button>

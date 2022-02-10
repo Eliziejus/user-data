@@ -13,7 +13,7 @@ export class SortDirective {
   constructor(private renderer: Renderer2, private targetElement: ElementRef) { }
 
   @HostListener("click")
-  sortData() {
+  public sortData() {
 
     const sort = new Sort();
 

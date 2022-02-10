@@ -1,15 +1,15 @@
 import {
-  Component, ElementRef, //not used
+  Component,
   EventEmitter,
-  Input, NgModule, //not used
+  Input,
   OnInit,
   Output
 } from '@angular/core';
-import {FormBuilder, FormGroup, Validator, Validators} from "@angular/forms"; //not used
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Gender} from "../models/gender.model";
-import {countries} from "../country-data-store"; // not used
 import {DatePipe} from "@angular/common";
 import {Profile} from "../models/profile.model";
+import {FormField} from "../enums/form-field.enums";
 
 @Component({
   selector: 'app-form-fields',
@@ -21,10 +21,10 @@ export class FormFieldsComponent implements OnInit {
   @Input() formValue: Profile;
   @Output() onSave: EventEmitter<Profile> = new EventEmitter<Profile>();
 
-  public countries = countries;
   public profileForm: FormGroup;
   public now: string | null;
-  private errorObject: { [key: string]: { message: string } } = { // Its the only way to solve one error
+  public field = FormField
+  private errorObject: { [key: string]: { message: string } } = {
     required: {
       message: 'Field required'
     },
@@ -33,8 +33,7 @@ export class FormFieldsComponent implements OnInit {
     }
   }
 
-  // ?????
-  genderArray = [ // todo type ?
+  public genderArray: Gender[] = [
     new Gender('1', 'Male'),
     new Gender('2', 'Female'),
     new Gender('3', 'I dont know'),
@@ -50,13 +49,17 @@ export class FormFieldsComponent implements OnInit {
     return JSON.stringify(value)
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const datePipe = new DatePipe('en-Us'); //create date
     this.now = datePipe.transform(new Date, 'yyyy-MM-dd') // transform date to default date format
 
     this.profileForm = this.formBuilder.group({ //create form data
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      surname: ['', [Validators.required, Validators.minLength(3)]],
+      name: ['', [Validators.required,
+        Validators.minLength(3),
+        Validators.pattern('[A-Za-z\\d!$%@#£€*?&]')]],
+      surname: ['', [Validators.required,
+        Validators.minLength(3),
+        Validators.pattern('[A-Za-z\\d!$%@#£€*?&]')]],
       birthday: ['', [Validators.required, Validators.minLength(3)]],
       gender: ['', Validators.required],
       phoneNumber: ['', [Validators.required]], //TODO Regex +370 or 86
@@ -68,7 +71,7 @@ export class FormFieldsComponent implements OnInit {
   }
 
 
-  private editProfile(profile: Profile) {
+  private editProfile(profile: Profile): void {
     this.profileForm.patchValue({
       ...profile
     })
@@ -85,29 +88,23 @@ export class FormFieldsComponent implements OnInit {
     }
   }
 
-  public getErrorMessage(field: string) {
+  public getErrorMessage(field: string): string {
     const errorKeys = Object.keys(this.profileForm.controls[field].errors || {});
     return errorKeys ? (this.errorObject[errorKeys[0]]).message : '';
   }
 
-  public dataInputClick(elementRef: HTMLElement) {
-    if (this.profileForm.controls['name'].valid && this.profileForm.controls['surname'].valid) {
+  public dataInputClick(elementRef: HTMLElement): void {
+    if (this.profileForm.controls[FormField.Name].valid && this.profileForm.controls[FormField.Surname].valid) {
       elementRef.focus();
     }
   }
 
-//TODO move form fields to enums instead of strings ;x
-  //TODO fix input name and surname validation name can not be empty like three spaces or special characters
-  //TODO all functions MUST have return types
-  //TODO all functions MUST have types
   //TODO update not working
   //TODO after update should redirect back to list page
-  //TODO after cancel delete all still data dissapear
   //TODO app is not working when localstorage is disabled
   //TODO table still missing paddings
   //TODO DO NOT IGNORE COMMENTS
   //TODO isanalizuoti koda
-  //TODO remove unused code
   //TODO All actions with data should be in service (only these actions which are like http calls)
   //TODO DO NOT USE CODE IF U DONT UNDERSTAND IT phase `if it works dont touch` not working in this case
 }
