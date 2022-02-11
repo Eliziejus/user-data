@@ -24,13 +24,13 @@ export class FormFieldsComponent implements OnInit {
   public profileForm: FormGroup;
   public now: string | null;
   public field = FormField
-  private errorObject: { [key: string]: { message: string } } = {
+  private errorObject: any= {
     required: {
       message: 'Field required'
     },
     minlength: {
       message: 'Text is too short'
-    }
+    },
   }
 
   public genderArray: Gender[] = [
@@ -54,12 +54,9 @@ export class FormFieldsComponent implements OnInit {
     this.now = datePipe.transform(new Date, 'yyyy-MM-dd') // transform date to default date format
 
     this.profileForm = this.formBuilder.group({ //create form data
-      name: ['', [Validators.required,
-        Validators.minLength(3),
-        Validators.pattern('[A-Za-z\\d!$%@#£€*?&]')]],
+      name: ['', [Validators.required]],
       surname: ['', [Validators.required,
-        Validators.minLength(3),
-        Validators.pattern('[A-Za-z\\d!$%@#£€*?&]')]],
+        Validators.minLength(3)]],
       birthday: ['', [Validators.required, Validators.minLength(3)]],
       gender: ['', Validators.required],
       phoneNumber: ['', [Validators.required]], //TODO Regex +370 or 86
@@ -88,9 +85,9 @@ export class FormFieldsComponent implements OnInit {
     }
   }
 
-  public getErrorMessage(field: string): string {
-    const errorKeys = Object.keys(this.profileForm.controls[field].errors || {});
-    return errorKeys ? (this.errorObject[errorKeys[0]]).message : '';
+  public getErrorMessage(field: string) {
+    const errorKeys = Object.keys(this.profileForm.controls[field].errors || [{}]);
+    return errorKeys ? (this.errorObject[errorKeys[0]])?.message : '';
   }
 
   public dataInputClick(elementRef: HTMLElement): void {

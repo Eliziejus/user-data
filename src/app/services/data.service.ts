@@ -15,6 +15,7 @@ export class DataService {
   }
 
   public initStorage(): void {
+    debugger;
     const data = JSON.parse(localStorage.getItem('app') || '[]');
     data.sort((a: Profile, b: Profile) => {
       return this.getAge(a.birthday) - this.getAge(b.birthday)
