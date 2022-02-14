@@ -15,7 +15,6 @@ export class DataService {
   }
 
   public initStorage(): void {
-    debugger;
     const data = JSON.parse(localStorage.getItem('app') || '[]');
     data.sort((a: Profile, b: Profile) => {
       return this.getAge(a.birthday) - this.getAge(b.birthday)
@@ -28,11 +27,12 @@ export class DataService {
     const profiles = JSON.parse(localStorage.getItem('app') || '[]');
     profiles.forEach((profileItem: Profile) => {
       if (profileItem.personalId === profile.personalId) {
-        profileItem = {...profile};
+        profileItem = profile;
       }
     });
     this.profileData.next(profiles);
-    localStorage.setItem('app', JSON.stringify(profiles));
+    localStorage.setItem('app', JSON.stringify(profile));
+    debugger;
   }
 
   public getProfileById(id: number): Profile {

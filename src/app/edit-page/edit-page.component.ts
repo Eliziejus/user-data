@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DataService} from "../services/data.service";
 import {Profile} from "../models/profile.model";
 
@@ -12,7 +12,7 @@ export class EditPageComponent implements OnInit {
 
   public profileData: Profile;
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) {
+  constructor(private route: ActivatedRoute, private dataService: DataService, private router: Router) {
   }
 
   public ngOnInit(): void {
@@ -21,6 +21,7 @@ export class EditPageComponent implements OnInit {
 
   public updateProfile(profile: Profile): void {
     this.dataService.updateProfile(profile);
+    this.router.navigate(['/form']);
   }
 
 }

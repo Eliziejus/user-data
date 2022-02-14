@@ -24,7 +24,7 @@ export class FormFieldsComponent implements OnInit {
   public profileForm: FormGroup;
   public now: string | null;
   public field = FormField
-  private errorObject: any= {
+  private errorObject: { [key: string]: { message: string } } = {
     required: {
       message: 'Field required'
     },
@@ -54,12 +54,12 @@ export class FormFieldsComponent implements OnInit {
     this.now = datePipe.transform(new Date, 'yyyy-MM-dd') // transform date to default date format
 
     this.profileForm = this.formBuilder.group({ //create form data
-      name: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.pattern('([A-Z][a-zA-Z]*)')]],
       surname: ['', [Validators.required,
-        Validators.minLength(3)]],
-      birthday: ['', [Validators.required, Validators.minLength(3)]],
+        Validators.minLength(3), Validators.pattern('([A-Z][a-zA-Z]*)')]],
+      birthday: ['', [Validators.required]],
       gender: ['', Validators.required],
-      phoneNumber: ['', [Validators.required]], //TODO Regex +370 or 86
+      phoneNumber: ['', [Validators.required, Validators.pattern('^86[0-9]{7}')]], //TODO Regex +370 or 86
     });
 
     if (this.formValue) {
@@ -97,8 +97,7 @@ export class FormFieldsComponent implements OnInit {
   }
 
   //TODO update not working
-  //TODO after update should redirect back to list page
-  //TODO app is not working when localstorage is disabled
+   //TODO app is not working when localstorage is disabled
   //TODO table still missing paddings
   //TODO DO NOT IGNORE COMMENTS
   //TODO isanalizuoti koda
