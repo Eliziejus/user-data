@@ -23,6 +23,7 @@
         <input #dataInput [readOnly]="profileForm.controls[field.Name].invalid || profileForm.controls[field.Surname].invalid"
                type="date"
                class="form-control"
+               [max]="now"
                formControlName="birthday"
                data-provide="datepicker"
                data-date-format="yyyy-mm-dd">

@@ -13,6 +13,7 @@ import { EditPageComponent } from './edit-page/edit-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import {GetDataPipe} from "./pipes/get-data.pipe";
 import {DatePipe} from "@angular/common";
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
@@ -25,6 +26,8 @@ import {DatePipe} from "@angular/common";
     EditPageComponent,
     OverviewPageComponent,
     GetDataPipe,
+    ModalComponent,
+
   ],
   imports: [
     ReactiveFormsModule,

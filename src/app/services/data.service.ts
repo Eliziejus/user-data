@@ -56,9 +56,4 @@ export class DataService {
   public deleteAll(): void { // Erase all data form table and localstorage
       localStorage.removeItem('app'); //remove all data form LocalStorage
   }
-
-  public deleteItem(): void {
-    localStorage.setItem('app', JSON.stringify(this.profileData));
-
-  }
 }
