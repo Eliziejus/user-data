@@ -1,8 +1,8 @@
-import {LOCALE_ID, NgModule} from '@angular/core';
+import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormFieldsComponent } from './form-fields/form-fields.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TableDataComponent } from './table-data/table-data.component';
@@ -14,6 +14,10 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
 import {GetDataPipe} from "./pipes/get-data.pipe";
 import {DatePipe} from "@angular/common";
 import { ModalComponent } from './modal/modal.component';
+import { SearchFilterPipePipe } from './pipes/search-filter-pipe.pipe';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { UserFormDisplayComponent } from './user-form-display/user-form-display.component';
 
 
 @NgModule({
@@ -27,13 +31,17 @@ import { ModalComponent } from './modal/modal.component';
     OverviewPageComponent,
     GetDataPipe,
     ModalComponent,
-
+    SearchFilterPipePipe,
+    LoginComponent,
+    RegisterComponent,
+    UserFormDisplayComponent,
   ],
   imports: [
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [DataService, DatePipe],
   bootstrap: [AppComponent]

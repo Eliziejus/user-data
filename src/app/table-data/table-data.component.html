@@ -1,13 +1,20 @@
+<div class="app-filter-field">
+  <div class="app-filter-field__label">Filter</div>
+  <div class="app-filter-field__search">
+    <input type="text" class="form-control" id="search" [(ngModel)]="searchValue" placeholder="Search">
+  </div>
+</div>
+
 <table class="table">
   <thead class="text-center">
   <tr>
     <th>Row number</th>
-    <th>Name</th>
+    <th>Full Name</th>
     <th [appSort]="profiles"
         class="mouse-pointer sort-by"
         data-order="desc"
         data-name="birthday">
-      Age<i class="fas fa-sort"></i>
+      Age<i class="fa fa-sort"></i>
     </th>
     <th>Gerder</th>
     <th>Phone Number</th>
@@ -15,7 +22,7 @@
   </tr>
   </thead>
   <tbody >
-  <tr *ngFor="let item of profiles; let i = index" class="table-data">
+  <tr *ngFor="let item of profiles | searchFilterPipe: searchValue let i = index" class="table-data ">
     <td class="p-4" data-label="Row number">{{i + 1}}</td>
     <td class="p-4" data-label="Name">{{item.name}} {{item.surname}}</td>
     <td class="p-4" data-label="Gender">{{item.birthday  | getDate }}</td>
@@ -34,29 +41,30 @@
 <button class="btn btn-danger m-4" (click)="deleteAll('question-modal-for-all')">Erase data</button>
 
 <app-modal id="question-modal">
-  <div class="app-modal__body__green-circle">
-    <i class="fa fa-question-circle fa-5x"></i>
+  <div class="app-modal__body__circle">
+    <i class="fa fa-question-circle icon" style="color: red"></i>
   </div>
   <h2>Are you sure you want to delete this profile?</h2>
-  <button class="btn btn-danger m-4" (click)="deleteProfileItemInModal('success-modal')">Yes</button>
-  <button class="btn btn-danger m-4" (click)="closeModal('question-modal')">No</button>
+  <button class="btn btn-danger m-4" style="width: 100px" (click)="deleteProfileItemInModal('success-modal')">Yes</button>
+  <button class="btn m-4 no-botton" (click)="closeModal('question-modal')">No</button>
 </app-modal>
 
 <app-modal id="question-modal-for-all">
-  <div class="app-modal__body__green-circle">
-    <i class="fa fa-question-circle fa-5x"></i>
+  <div class="app-modal__body__circle">
+    <i class="fa fa-question-circle icon" style="color: red"></i>
   </div>
   <h2>Are you sure you want to delete all profile data?</h2>
-  <button class="btn btn-danger m-4" (click)="deleteAllInModal('success-modal')">Yes</button>
-  <button class="btn btn-danger m-4" (click)="closeModal('question-modal-for-all')">No</button>
+  <button class="btn btn-danger m-4" style="width: 100px" (click)="deleteAllInModal('success-modal')">Yes</button>
+  <button class="btn m-4 no-botton" (click)="closeModal('question-modal-for-all')">No</button>
 </app-modal>
 
 <app-modal id="success-modal">
-  <div class="app-modal__body__green-circle">
-    <i class="fa fa-check-circle fa-5x"></i>
+  <div class="app-modal__body__circle">
+    <i class="fa fa-check-circle icon" style="color: greenyellow"></i>
   </div>
-  <h2>You have successfully deleted profile data!</h2>
-  <button class="btn btn-success m-4" (click)="closeModal('success-modal')">OK</button>
+  <div><h2 class="title">Cool!</h2></div>
+  <h4>You have successfully deleted profile data!</h4>
+  <button class="btn btn-success m-4" style="width: 260px" (click)="closeModal('success-modal')">OK</button>
 </app-modal>
 
 

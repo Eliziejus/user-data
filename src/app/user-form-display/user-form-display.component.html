@@ -1,0 +1,24 @@
+<div class="app-user-form">
+  <div class="app-user-form__container">
+    <form class="signUp" id="signUp" [formGroup]="registerUserForm">
+      <h3>Create Your Account</h3>
+      <label for="email" class="labels">Email</label>
+      <input type="email" id="email" formControlName="email" required/>
+      <label for="password" class="labels">Password</label>
+      <input type="password" id="password" formControlName="password" required/>
+      <label for="confirmPassword" class="labels"> Confirm Password</label>
+      <input type="password" id="confirmPassword" formControlName="rePassword" required/>
+      <button class="form-btn switch" (click)="switch()" type="button">Log In</button>
+      <button class="form-btn down-switch" (click)="create()" type="submit">Sign Up</button>
+    </form>
+    <form class="signIn" id="signIn" [formGroup]="userLogin">
+      <h3>Login With Your Account</h3>
+      <label for="SignInEmail" class="labels">Email</label>
+      <input type="email" id="SignInEmail" formControlName="email" required/>
+      <label for="SignInpassword" class="labels">Password</label>
+      <input type="password" id="SignInpassword" formControlName="password" required/>
+      <button class="form-btn switch" (click)="switchBack('signUp')">Back</button>
+      <button class="form-btn down-switch"  (click)="login()">Log In</button>
+    </form>
+  </div>
+</div>

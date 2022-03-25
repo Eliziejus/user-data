@@ -95,12 +95,4 @@ export class FormFieldsComponent implements OnInit {
       elementRef.focus();
     }
   }
-
-  //TODO update not working
-   //TODO app is not working when localstorage is disabled
-  //TODO table still missing paddings
-  //TODO DO NOT IGNORE COMMENTS
-  //TODO isanalizuoti koda
-  //TODO All actions with data should be in service (only these actions which are like http calls)
-  //TODO DO NOT USE CODE IF U DONT UNDERSTAND IT phase `if it works dont touch` not working in this case
 }

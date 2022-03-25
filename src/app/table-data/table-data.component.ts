@@ -12,25 +12,20 @@ import {ModalService} from "../modal/service/modal.service";
 export class TableDataComponent {
 
   @Input() profiles: Profile[];
-  public personalId: number;
+  public rowId: number;
+  public searchValue: string
 
   constructor(private cdr: ChangeDetectorRef, private router: Router, private dataService: DataService, private modalService: ModalService) {
   }
 
-  public deteleTableItem(id: string, name?: string,): void { // Delete selected row in localstorage and table
-    // this.modalService.open(id);
-    // if (confirm(`Are you sure to delete ${name}`)) { // pop up confirmation if user really wanna delete person
-    //   this.profiles.splice(id, 1);
-    // }
-  }
 
   public deleteProfileItem(modalId: string, id: number): void {
-    this.personalId = id;
+    this.rowId = id;
     this.modalService.open(modalId);
   }
 
   public deleteProfileItemInModal(modalId: string): void {
-    this.profiles.splice(this.personalId, 1);
+    this.profiles.splice(this.rowId, 1);
     localStorage.setItem('app', JSON.stringify(this.profiles))
     this.modalService.open(modalId);
     this.closeModal('question-modal');

@@ -4,7 +4,33 @@
 
 .table-data {
     text-align: center;
-  margin: 20px;
+    margin: 20px;
+}
+
+.app-filter-field {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+
+  &__label {
+    font-family: sans-serif;
+    font-weight: bold;
+  }
+
+  &__search {
+    margin: 20px;
+    width: 20%;
+    border-radius: 10px;
+  }
+}
+.no-botton {
+  width: 100px;
+  border: solid #dc3545;
+  border-radius: 6px;
+}
+.title {
+  position: relative;
+  top: -26px;
 }
 
 @media screen and (max-width: 600px) {
@@ -41,6 +67,14 @@
 
   table td:last-child {
     border-bottom: 0;
+  }
+
+  .app-filter-field {
+    &__search {
+      margin: 20px;
+      width: auto;
+      border-radius: 10px;
+    }
   }
 }
 

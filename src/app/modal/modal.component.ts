@@ -16,11 +16,6 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // ensure id attribute exists
-    if (!this.id) {
-      console.error('modal must have an id');
-      return;
-    }
 
     // move element to bottom of page (just before </body>) so it can be displayed above everything else
     document.body.appendChild(this.element);
