@@ -1,9 +1,169 @@
-.app-login {
-  padding: 30px;
-  background: red;
-  margin: 10px 0 0 0;
-  width: 100%;
-  height: 100%;
-  //opacity: 0.2;
-  border: 1rem solid;
+
+form {
+  position: absolute;
+  text-align: center;
+  background: #fff;
+  width: 310px;
+  height: 470px;
+  border-radius: 5px;
+  padding: 30px 20px 0 20px;
+  box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+h3 {
+  font-family: 'Dosis';
+  font-size: 35px;
+  text-transform: uppercase;
+  color: #87613d;
+  margin-bottom: 30px;
+}
+
+.form-btn {
+  position: absolute;
+  width: 50%;
+  height: 60px;
+  border: 0;
+  font-family: 'Dosis';
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.form-btn.switch {
+  left: 0;
+  bottom: -20px;
+  border-radius: 0 0 0 5px;
+  background-color: rgba(255, 125, 0, 0.35);
+  color: #fff;
+  transition: all 0.3s linear;
+  :hover {
+    background-color: rgba(255, 125, 0, 0.65);
+    color: #fff;
+  }
+}
+
+button.form-btn.down-switch {
+  right: 0;
+  bottom: -20px;
+  border-radius: 0 0 5px 0;
+  background-color: #ff7d00;
+  color: #fff;
+}
+
+input {
+  border: 1px solid #3b5998;
+  width: 85%;
+  text-align: center;
+  font-size: 21px;
+  font-weight: 100;
+  margin-bottom: 25px;
+}
+
+.signIn {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  z-index: 1;
+  transform: perspective(160px) translate3d(100px, 0px, -30px);
+  opacity: 0.5;
+
+}
+
+.active-down-switch {
+  animation-name: foregrounding-down-switch;
+  animation-duration: 0.9s;
+  animation-fill-mode: forwards;
+}
+
+.active-switch {
+  animation-name: foregrounding-switch;
+  animation-duration: 0.9s;
+  animation-fill-mode: forwards;
+}
+
+.inactive-down-switch {
+  animation-name: overshadowing-down-switch;
+  animation-duration: 0.9s;
+  animation-fill-mode: forwards;
+}
+
+.inactive-switch {
+  animation-name: overshadowing-switch;
+  animation-duration: 0.9s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes overshadowing-down-switch {
+  0% {
+    z-index: 2;
+    transform: perspective(100px) translate3d(0px, 0px, 0px);
+    opacity: 1;
+    box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
+  }
+  100% {
+    z-index: 1;
+    transform: perspective(100px) translate3d(100px, 0px, -30px);
+    opacity: 0.5;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.25);
+  }
+}
+
+@keyframes overshadowing-switch {
+  0% {
+    z-index: 2;
+    transform: perspective(100px) translate3d(0px, 0px, 0px);
+    opacity: 1;
+    box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
+  }
+  100% {
+    z-index: 1;
+    transform: perspective(100px) translate3d(-100px, 0px, -30px);
+    opacity: 0.5;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.25);
+  }
+}
+
+@keyframes foregrounding-down-switch {
+  0% {
+    z-index: 1;
+    transform: perspective(100px) translate3d(100px, 0px, -30px);
+    opacity: 0.5;
+  }
+  50% {
+    z-index: 2;
+    transform: perspective(100px) translate3d(400px, 0px, -30px);
+  }
+  100% {
+    z-index: 2;
+    transform: perspective(100px) translate3d(0px, 0px, 0px);
+    opacity: 1;
+  }
+}
+
+@keyframes foregrounding-switch {
+  0% {
+    z-index: 1;
+    transform: perspective(100px) translate3d(-100px, 0px, -30px);
+    opacity: 0.5;
+  }
+  50% {
+    z-index: 2;
+    transform: perspective(100px) translate3d(-400px, 0px, -30px);
+  }
+  100% {
+    z-index: 2;
+    transform: perspective(100px) translate3d(0px, 0px, 0px);
+    opacity: 1;
+  }
+}
+
+.labels {
+  display: flex;
+}
+
+.error {
+  color: red;
 }

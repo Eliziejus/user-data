@@ -1,17 +1,21 @@
-<div class="app-register">
-  <form>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password">
-    </div>
-    <div class="mb-3">
-      <label for="confirmPassword" class="form-label">Confirm Password</label>
-      <input type="password" class="form-control" id="confirmPassword">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
+<form class="signUp" id="signUp" [formGroup]="registerUserForm">
+  <h3>Create Your Account</h3>
+  <label for="email" class="labels">Email</label>
+  <input type="email" id="email" formControlName="email" required/>
+  <label for="password" class="labels">Password</label>
+  <input type="password" id="password" formControlName="password" required/>
+  <label for="confirmPassword" class="labels"> Confirm Password</label>
+  <input type="password" id="confirmPassword" formControlName="rePassword" passwordValidator="password" required/>
+<!--  <small class="error" *ngIf="registerUserForm.controls['rePassword']"> Password doesn't match</small>-->
+  <button class="form-btn switch" (click)="switch()" type="button">Log In</button>
+  <button class="form-btn down-switch" [disabled]="registerUserForm.invalid" (click)="create('success-modal')" type="submit">Sign Up</button>
+</form>
+
+<app-modal id="success-modal">
+  <div class="app-modal__body__circle">
+    <i class="fa fa-check-circle icon" style="color: greenyellow"></i>
+  </div>
+  <div><h2 class="title">Cool!</h2></div>
+  <h4>You register your user</h4>
+  <button class="btn btn-success m-4" style="width: 260px" (click)="closeModal('success-modal')">OK</button>
+</app-modal>
