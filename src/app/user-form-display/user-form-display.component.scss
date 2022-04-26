@@ -12,3 +12,24 @@
     left: calc(50% - 160px);
   }
 }
+.loading-none {
+  display: none;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 900;
+
+  &__loading-spinner{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    color: orange;
+  }
+}

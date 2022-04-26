@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   public userLogin: any;
 
-  constructor( public userService: UserService, public formBuilder: FormBuilder ) {
+  constructor(public userService: UserService, public formBuilder: FormBuilder) {
   }
 
   public ngOnInit(): void {
@@ -31,7 +31,15 @@ export class LoginComponent implements OnInit {
     signUpAnimation!.classList.remove('inactive-switch');
     signInAnimation!.classList.remove('active-down-switch');
   }
+
   public login(): void {
     this.userService.login(this.userLogin.value);
+    const loader = document.getElementById('loading');
+    if (loader!.className === 'loading-none') {
+      loader!.className = 'loading';
+    }
+    setTimeout(() => {
+        loader!.className = 'loading-none';
+    }, 999);
   }
 }

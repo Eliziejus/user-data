@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../services/user.service";
 import {ModalService} from "../modal/service/modal.service";
 
@@ -10,10 +10,11 @@ import {ModalService} from "../modal/service/modal.service";
 })
 export class RegisterComponent implements OnInit {
 
-  public registerUserForm: any;
+  public registerUserForm: FormGroup;
 
 
-  constructor( public userService: UserService, public formBuilder: FormBuilder, private modalService: ModalService) { }
+  constructor(public userService: UserService, public formBuilder: FormBuilder, private modalService: ModalService) {
+  }
 
   public ngOnInit(): void {
 
@@ -22,8 +23,13 @@ export class RegisterComponent implements OnInit {
       password: ['', [Validators.required]],
       rePassword: ['', Validators.required],
     }, {
-      // validator: this.passwordValidator('password', 'confirm_password')
+      validators: this.passwordMatchValidator,
+
     });
+  }
+
+  passwordMatchValidator(frm: FormGroup) {
+    return frm.controls['password'].value === frm.controls['rePassword'].value ? null : {'mismatch': true};
   }
 
   public switch(): void {
@@ -43,23 +49,28 @@ export class RegisterComponent implements OnInit {
     this.closeModal('question-modal');
   }
 
-  // public passwordValidator(password: string, rePassword: string) {
-  //
-  //   return (formGroup: FormGroup) => {
-  //     const control = formGroup.controls[password];
-  //     const matchingControl = formGroup.controls[rePassword];
-  //     if (matchingControl.errors && !matchingControl.errors['passwordValidator']) {
-  //       return;
-  //     }
-  //     if (control.value !== matchingControl.value) {
-  //       matchingControl.setErrors({ passwordValidator: true });
-  //     } else {
-  //       matchingControl.setErrors(null);
-  //     }
-  //   }
-  // }
+  get controls() {
+    return this.registerUserForm.controls;
+  }
 
   public closeModal(modalId: string): void {
     this.modalService.close(modalId);
+  }
+
+  public onPasswordChange(): void {
+    if (this.confirm_password.value == this.password.value) {
+      this.confirm_password.setErrors(null);
+    } else {
+      this.confirm_password.setErrors({mismatch: false});
+    }
+  }
+
+// getting the form control elements
+  get password(): AbstractControl {
+    return this.registerUserForm.controls['password'];
+  }
+
+  get confirm_password(): AbstractControl {
+    return this.registerUserForm.controls['confirm_password'];
   }
 }

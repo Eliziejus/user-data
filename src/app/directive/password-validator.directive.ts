@@ -7,7 +7,7 @@ export function PasswordValidator(password: string, rePassword: string) {
   return (formGroup: FormGroup) => {
     const control = formGroup.controls[password];
     const matchingControl = formGroup.controls[rePassword];
-    if (matchingControl.errors && !matchingControl.errors["passwordValidator"]) {
+    if (matchingControl.errors && !matchingControl.errors["PasswordValidator"]) {
       return;
     }
     if (control.value !== matchingControl.value) {
