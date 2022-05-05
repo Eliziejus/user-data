@@ -1,3 +1,11 @@
 <app-form-fields (onSave)="saveProfile($event)"></app-form-fields>
 <app-table-data [profiles]="profilesList"></app-table-data>
+<div class=loading-none id="loading">
+  <div class="loading__loading-spinner">
+    <div class="spinner-border">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
+
 

@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
     this.userLogin = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required, Validators.min(5)],
+      password: ['', [Validators.required, Validators.min(5)]],
     });
   }
 
@@ -34,12 +34,6 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     this.userService.login(this.userLogin.value);
-    const loader = document.getElementById('loading');
-    if (loader!.className === 'loading-none') {
-      loader!.className = 'loading';
-    }
-    setTimeout(() => {
-        loader!.className = 'loading-none';
-    }, 999);
-  }
+
+  };
 }

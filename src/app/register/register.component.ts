@@ -11,26 +11,41 @@ import {ModalService} from "../modal/service/modal.service";
 export class RegisterComponent implements OnInit {
 
   public registerUserForm: FormGroup;
+  public emails: any;
 
 
   constructor(public userService: UserService, public formBuilder: FormBuilder, private modalService: ModalService) {
   }
 
   public ngOnInit(): void {
-
     this.registerUserForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       rePassword: ['', Validators.required],
     }, {
       validators: this.passwordMatchValidator,
-
     });
   }
 
-  passwordMatchValidator(frm: FormGroup) {
+  public passwordMatchValidator(frm: FormGroup) {
     return frm.controls['password'].value === frm.controls['rePassword'].value ? null : {'mismatch': true};
   }
+  //
+  // public existEmail() :void {
+  //   // const email = localStorage.getItem('users');
+  //   this.emails = JSON.parse(localStorage.getItem('users') || '[]');
+  //   // console.log(this.emails);
+  //   for (let i = 0; i < this.emails.length; i++) {
+  //     if (this.controls['email'] !== this.emails[i].email) { // TODO
+  //       console.log('email is taken');
+  //       debugger;
+  //     } else if (this.controls['email'] === this.emails[i].email) {
+  //       console.log('email is not taken');
+  //       debugger;
+  //     }
+  //     debugger;
+  //   }
+  // }
 
   public switch(): void {
     const signInAnimation = document.querySelector('#signIn');
@@ -46,7 +61,6 @@ export class RegisterComponent implements OnInit {
   public create(modalId: string): void {
     this.userService.createUser(this.registerUserForm.value);
     this.modalService.open(modalId);
-    this.closeModal('question-modal');
   }
 
   get controls() {

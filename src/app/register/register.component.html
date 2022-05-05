@@ -14,11 +14,3 @@
   <button class="form-btn down-switch" [disabled]="registerUserForm.invalid" (click)="create('success-modal')" type="submit">Sign Up</button>
 </form>
 
-<app-modal id="success-modal">
-  <div class="app-modal__body__circle">
-    <i class="fa fa-check-circle icon" style="color: greenyellow"></i>
-  </div>
-  <div><h2 class="title">Cool!</h2></div>
-  <h4>You register your user</h4>
-  <button class="btn btn-success m-4" style="width: 260px" (click)="closeModal('success-modal')">OK</button>
-</app-modal>

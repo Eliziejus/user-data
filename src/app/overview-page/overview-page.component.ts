@@ -18,6 +18,14 @@ export class OverviewPageComponent implements OnInit {
     this.dataService.initStorage();
     this.dataService.profileData.subscribe((profiles) => {
       this.profilesList = profiles;
+
+      const loader = document.getElementById('loading');
+      if (loader!.className === 'loading-none') {
+        loader!.className = 'loading';
+      }
+      setTimeout(() => {
+        loader!.className = 'loading-none';
+      }, 999);
     })
   }
 

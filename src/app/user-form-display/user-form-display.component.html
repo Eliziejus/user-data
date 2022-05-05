@@ -4,11 +4,11 @@
     <app-login></app-login>
   </div>
 </div>
-
-<div class=loading-none id="loading">
-  <div class="loading__loading-spinner">
-    <div class="spinner-border">
-      <span class="visually-hidden">Loading...</span>
-    </div>
+<app-modal id="success-modal">
+  <div class="app-modal__body__circle">
+    <i class="fa fa-check-circle icon" style="color: greenyellow"></i>
   </div>
-</div>
+  <div><h2 class="title">Cool!</h2></div>
+  <h4>You register your user</h4>
+  <button class="btn btn-success m-4" style="width: 260px" (click)="closeModal('success-modal')">OK</button>
+</app-modal>

@@ -18,7 +18,6 @@ import { SearchFilterPipePipe } from './pipes/search-filter-pipe.pipe';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserFormDisplayComponent } from './user-form-display/user-form-display.component';
-import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -36,7 +35,6 @@ import { LoaderComponent } from './loader/loader.component';
     LoginComponent,
     RegisterComponent,
     UserFormDisplayComponent,
-    LoaderComponent,
   ],
   imports: [
     ReactiveFormsModule,
