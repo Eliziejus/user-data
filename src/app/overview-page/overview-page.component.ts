@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Profile} from "../models/profile.model";
-import {DataService} from "../services/data.service";
+import { Profile } from "../models/profile.model";
+import { DataService } from "../services/data.service";
 
 @Component({
   selector: 'app-overview-page',
@@ -14,7 +14,7 @@ export class OverviewPageComponent implements OnInit {
 
   public profilesList: Profile[];
 
-  public ngOnInit(): void {  //TODO more analalyze code...
+  public ngOnInit(): void {
     this.dataService.initStorage();
     this.dataService.profileData.subscribe((profiles) => {
       this.profilesList = profiles;

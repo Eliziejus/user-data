@@ -1,3 +1,4 @@
+@import 'src/app/scssVariable/variable';
 
 form {
   position: absolute;
@@ -7,7 +8,7 @@ form {
   height: 500px;
   border-radius: 5px;
   padding: 30px 20px 0 20px;
-  box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 50px 0 $darkGrey;
   box-sizing: border-box;
 }
 
@@ -15,7 +16,7 @@ h3 {
   font-family: 'Dosis';
   font-size: 35px;
   text-transform: uppercase;
-  color: #87613d;
+  color: $darkBrown;
   margin-bottom: 30px;
 }
 
@@ -31,34 +32,42 @@ h3 {
   cursor: pointer;
 }
 
-.form-btn.switch {
-  left: 0;
-  bottom: -20px;
-  border-radius: 0 0 0 5px;
-  background-color: rgba(255, 125, 0, 0.35);
-  color: #fff;
-  transition: all 0.3s linear;
-  :hover {
-    background-color: rgba(255, 125, 0, 0.65);
-    color: #fff;
-  }
+.form-btn.login {
+  left: -34px;
+  top: -60px;
+  color: grey;
+  background: $white;
+  height: 38px;
+  transition: 1s;
 }
 
-button.form-btn.down-switch {
-  right: 0;
-  bottom: -20px;
-  border-radius: 0 0 5px 0;
-  background-color: #ff7d00;
-  color: #fff;
+.form-btn.login.after {
+  left: 122px;
+  top: -60px;
+  color: grey;
+  width: 100px;
+  background: $white;
+  border-bottom: 1px solid;
+  height: 38px;
 }
 
-input {
-  border: 1px solid #3b5998;
+button.form-btn.signUp-style {
+  right: 80px;
+  bottom: 14px;
+  border-radius: 30px;
+  background-color: $white;
+  color: $green;
+  border: 1px solid $green;
+}
+
+.input {
+  border: 1px solid $input-border;
+  background: $input-background;
   width: 85%;
   text-align: center;
   font-size: 21px;
   font-weight: 100;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .signIn {
@@ -69,7 +78,6 @@ input {
   z-index: 1;
   transform: perspective(160px) translate3d(100px, 0px, -30px);
   opacity: 0.5;
-
 }
 
 .signUp {
@@ -105,13 +113,13 @@ input {
     z-index: 2;
     transform: perspective(100px) translate3d(0px, 0px, 0px);
     opacity: 1;
-    box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 50px 0 $darkGrey;
   }
   100% {
     z-index: 1;
     transform: perspective(100px) translate3d(100px, 0px, -30px);
     opacity: 0.5;
-    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 20px 0 $darkGrey;
   }
 }
 
@@ -120,13 +128,13 @@ input {
     z-index: 2;
     transform: perspective(100px) translate3d(0px, 0px, 0px);
     opacity: 1;
-    box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 50px 0 $darkGrey;
   }
   100% {
     z-index: 1;
     transform: perspective(100px) translate3d(-100px, 0px, -30px);
     opacity: 0.5;
-    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 20px 0 $darkGrey;
   }
 }
 
@@ -166,8 +174,12 @@ input {
 
 .labels {
   display: flex;
+  padding: 5px;
+  margin-left: 15px;
 }
 
 .error {
+  position: relative;
+  bottom: 30px;
   color: red;
 }

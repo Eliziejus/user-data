@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../services/user.service";
 import {ModalService} from "../modal/service/modal.service";
+import {User} from "../models/user.model";
 
 @Component({
   selector: 'app-register',
@@ -10,9 +11,13 @@ import {ModalService} from "../modal/service/modal.service";
 })
 export class RegisterComponent implements OnInit {
 
-  public registerUserForm: FormGroup;
-  public emails: any;
 
+  get controls() {
+    return this.registerUserForm.controls;
+  }
+
+  public registerUserForm: FormGroup;
+  public emails: User[];
 
   constructor(public userService: UserService, public formBuilder: FormBuilder, private modalService: ModalService) {
   }
@@ -25,46 +30,39 @@ export class RegisterComponent implements OnInit {
     }, {
       validators: this.passwordMatchValidator,
     });
+
   }
 
   public passwordMatchValidator(frm: FormGroup) {
     return frm.controls['password'].value === frm.controls['rePassword'].value ? null : {'mismatch': true};
   }
-  //
-  // public existEmail() :void {
-  //   // const email = localStorage.getItem('users');
-  //   this.emails = JSON.parse(localStorage.getItem('users') || '[]');
-  //   // console.log(this.emails);
-  //   for (let i = 0; i < this.emails.length; i++) {
-  //     if (this.controls['email'] !== this.emails[i].email) { // TODO
-  //       console.log('email is taken');
-  //       debugger;
-  //     } else if (this.controls['email'] === this.emails[i].email) {
-  //       console.log('email is not taken');
-  //       debugger;
-  //     }
-  //     debugger;
-  //   }
-  // }
 
   public switch(): void {
     const signInAnimation = document.querySelector('#signIn');
     const signUpAnimation = document.querySelector('#signUp');
+    const animationLoginButton = document.querySelector('#buttonLogin');
+    const animationSignButton = document.querySelector('#buttonSign');
 
-    signInAnimation!.classList.add('active-down-switch');
-    signUpAnimation!.classList.add('inactive-switch');
-    signInAnimation!.classList.remove('active-switch');
-    signUpAnimation!.classList.remove('inactive-down-switch');
-    signInAnimation!.classList.remove('inactive-down-switch');
+    animationLoginButton!.classList.add('after');
+    animationSignButton!.classList.remove('after');
+    signUpAnimation!.classList.add('active-switch');
+    signInAnimation!.classList.add('inactive-down-switch');
+    signUpAnimation!.classList.remove('inactive-switch');
+    signInAnimation!.classList.remove('active-down-switch');
+
+
   }
 
   public create(modalId: string): void {
-    this.userService.createUser(this.registerUserForm.value);
-    this.modalService.open(modalId);
-  }
-
-  get controls() {
-    return this.registerUserForm.controls;
+    this.emails = JSON.parse(localStorage.getItem('users') || '[]');
+    for (let i = 0; i < this.emails.length; i++) {
+      if (this.controls['email'].value === this.emails[i].email) {
+        this.modalService.open('error-modal');
+      } else {
+        this.userService.createUser(this.registerUserForm.value);
+        this.modalService.open(modalId);
+      }
+    }
   }
 
   public closeModal(modalId: string): void {
@@ -79,12 +77,11 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-// getting the form control elements
-  get password(): AbstractControl {
+  public get password(): AbstractControl {
     return this.registerUserForm.controls['password'];
   }
 
-  get confirm_password(): AbstractControl {
+  public get confirm_password(): AbstractControl {
     return this.registerUserForm.controls['confirm_password'];
   }
 }

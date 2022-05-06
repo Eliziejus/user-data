@@ -1,11 +1,10 @@
+<button class="form-btn sign" id="buttonSign" (click)="switchBack()">Login</button>
 <form class="signIn" id="signIn" [formGroup]="userLogin">
-  <h3>Login With Your Account</h3>
   <label for="SignInEmail" class="labels">Email</label>
   <input type="email" id="SignInEmail" formControlName="email"/>
   <label for="SignInpassword" class="labels">Password</label>
   <input type="password" id="SignInpassword" formControlName="password"/>
   <small class="error" *ngIf="userLogin.controls['email'].invalid && userLogin.controls['email'].touched">Incorrect Email or Password</small>
-  <button class="form-btn switch" (click)="switchBack()">Back</button>
   <button class="form-btn down-switch" (click)="login()">Log In</button>
 </form>
 

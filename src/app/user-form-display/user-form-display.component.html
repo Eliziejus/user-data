@@ -12,3 +12,11 @@
   <h4>You register your user</h4>
   <button class="btn btn-success m-4" style="width: 260px" (click)="closeModal('success-modal')">OK</button>
 </app-modal>
+<app-modal id="error-modal">
+  <div class="app-modal__body__circle">
+    <i class="fa fa-check-circle icon" style="color: darkred"></i>
+  </div>
+  <div><h2 class="title">Ops!</h2></div>
+  <h4>Email is alredy taken</h4>
+  <button class="btn btn-success m-4" style="width: 260px" (click)="closeModal('error-modal')">OK</button>
+</app-modal>

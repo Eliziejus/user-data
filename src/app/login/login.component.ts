@@ -25,11 +25,16 @@ export class LoginComponent implements OnInit {
   public switchBack(): void {
     const signInAnimation = document.querySelector('#signIn');
     const signUpAnimation = document.querySelector('#signUp');
+    const animationLoginButton = document.querySelector('#buttonLogin');
+    const animationSignButton = document.querySelector('#buttonSign');
 
-    signUpAnimation!.classList.add('active-switch');
-    signInAnimation!.classList.add('inactive-down-switch');
-    signUpAnimation!.classList.remove('inactive-switch');
-    signInAnimation!.classList.remove('active-down-switch');
+    animationLoginButton!.classList.remove('after');
+    animationSignButton!.classList.add('after');
+    signInAnimation!.classList.add('active-down-switch');
+    signUpAnimation!.classList.add('inactive-switch');
+    signInAnimation!.classList.remove('active-switch');
+    signUpAnimation!.classList.remove('inactive-down-switch');
+    signInAnimation!.classList.remove('inactive-down-switch');
   }
 
   public login(): void {

@@ -1,16 +1,16 @@
+<button class="form-btn login after" id="buttonLogin" (click)="switch()" type="button">SignUp</button>
 <form class="signUp" id="signUp" [formGroup]="registerUserForm">
-  <h3>Create Your Account</h3>
   <label for="email" class="labels">Email</label>
-  <input type="email" id="email" formControlName="email"/>
-  <small class="error" *ngIf="controls['email'].invalid && controls['email'].touched">Incorrect Email or Password</small>
+  <input class="input" type="email" id="email" formControlName="email"/>
+  <small class="error" *ngIf="controls['email'].invalid && controls['email'].touched">Incorrect Email</small>
   <label for="password" class="labels">Password</label>
-  <input type="password" id="password" formControlName="password"/>
+  <input class="input" type="password" id="password" formControlName="password"/>
+  <small class="error" *ngIf="controls['password'].invalid && controls['password'].touched">Incorrect Password</small>
   <label for="confirmPassword" class="labels"> Confirm Password</label>
-  <input type="password" id="confirmPassword" formControlName="rePassword" (change)="onPasswordChange" passwordValidator="password"/>
+  <input class="input" type="password" id="confirmPassword" formControlName="rePassword" (change)="onPasswordChange" passwordValidator="password"/>
   <span class="error" *ngIf="registerUserForm.errors?['mismatch'] && (registerUserForm.controls['rePassword'].dirty || registerUserForm.controls['rePassword'].touched): '' ">
   Password do not match
   </span>
-  <button class="form-btn switch" (click)="switch()" type="button">Log In</button>
-  <button class="form-btn down-switch" [disabled]="registerUserForm.invalid" (click)="create('success-modal')" type="submit">Sign Up</button>
+  <button class="form-btn signUp-style" [disabled]="registerUserForm.invalid" (click)="create('success-modal')" type="submit">Sign Up</button>
 </form>
 
